@@ -15,7 +15,7 @@ mydb = mysql.connector.connect(
     password=DBpassword,
     database="attractions"
 )
-mycursor = mydb.cursor()
+mycursor = mydb.cursor(dictionary=True) # can return dict list
 
 
 # Server
@@ -77,20 +77,8 @@ async def get_attraction_byID(attractionID: int):
 async def fetchJSON(sql, val):
 	mycursor.execute(sql, val)
 	myresult = mycursor.fetchall()
-	list = []
 	for data in myresult:
-		attraction_object = {
-			"id": data[0],
-			"name": data[1],
-			"category": data[2],
-			"description": data[3],
-			"address": data[4],
-			"transport": data[5],
-			"mrt": data[6],
-			# JSON doesn't natively support Decimal objects, so you need to convert them to a JSON-serializable type before serializing.
-			"lat": float(data[7]),
-			"lng": float(data[8]),
-			"images": data[9].split(",")
-		}
-		list.append(attraction_object)
-	return list
+		data["lat"] = float(data["lat"]) # JSONresponse need a float type than decimal
+		data["lng"] = float(data["lng"])
+		data["images"] = data["images"].split(',')
+	return myresult
