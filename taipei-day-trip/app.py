@@ -59,7 +59,7 @@ async def get_attractions(page: int = 0, keyword: str | None = None):
 	except Exception as e:
 		return JSONResponse(status_code=500, content={"error": True, "message": e})
 
-@app.get("/api/attractions/{attractionID}", response_class=JSONResponse)
+@app.get("/api/attraction/{attractionID}", response_class=JSONResponse)
 async def get_attraction_byID(attractionID: int):
 	try:
 		sql = "SELECT * FROM attractions WHERE id = %s"
