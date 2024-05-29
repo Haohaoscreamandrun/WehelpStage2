@@ -15,7 +15,7 @@ mydb = mysql.connector.connect(
     password=DBpassword,
     database="attractions"
 )
-mycursor = mydb.cursor(dictionary=True) # can return dict list
+ # can return dict list
 
 
 # Server
@@ -72,9 +72,27 @@ async def get_attraction_byID(attractionID: int):
 			return JSONResponse(status_code=200, content={"data": obj})
 	except Exception as e:
 		return JSONResponse(status_code=500, content={"error": True, "message": e})
+	
+@app.get("/api/mrts", response_class= JSONResponse)
+async def get_MRTs():
+	try:
+		sql = "SELECT mrt FROM attractions\
+			GROUP BY mrt\
+			ORDER BY COUNT(name) DESC"
+		mycursor = mydb.cursor()
+		mycursor.execute(sql)
+		myresult = mycursor.fetchall()
+		list = []
+		for mrt in myresult:
+			if mrt[0] is not None:
+				list.append(mrt[0])
+		return JSONResponse(status_code=200, content={"data": list})
+	except Exception as e:
+		return JSONResponse(status_code=500, content={"error": True, "message": e})
 
 # Global function
 async def fetchJSON(sql, val):
+	mycursor = mydb.cursor(dictionary=True)
 	mycursor.execute(sql, val)
 	myresult = mycursor.fetchall()
 	for data in myresult:
