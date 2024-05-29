@@ -157,6 +157,9 @@ root@ip-172-31-36-243:/home/ubuntu/WehelpStage2# sudo apt install python3-uvicor
 
 ```shell
 ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ uvicorn app:app --host 0.0.0.0
+
+# If running in background
+ubuntu@ip-172-31-36-243:~/WehelpStage2$ nohup uvicorn taipei-day-trip.app:app --host 0.0.0.0 &
 ```
 
 另外需要去instance找傳入/出規則(Inbound rule)，新增以下規則：
