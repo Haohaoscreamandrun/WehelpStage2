@@ -152,3 +152,15 @@ Success! data is loaded.
 root@ip-172-31-36-243:/home/ubuntu/WehelpStage2# sudo apt install python3-fastapi
 root@ip-172-31-36-243:/home/ubuntu/WehelpStage2# sudo apt install python3-uvicorn
 ```
+
+## start uvicorn
+
+```shell
+ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ uvicorn app:app --host 0.0.0.0
+```
+
+ 另外需要去instance找傳入/出規則(Inbound rule)，新增以下規則：
+
+ 1. 類型：自訂TCP
+ 2. 連接埠：8000
+ 3. 來源：0.0.0.0/0 (允許任何IP存取)
