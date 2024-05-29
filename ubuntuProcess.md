@@ -175,3 +175,15 @@ ubuntu@ip-172-31-36-243:~/WehelpStage2$ nohup uvicorn taipei-day-trip.app:app --
 + <http://13.236.0.170:8000/api/attractions?page=0&keyword=北>  
 + <http://13.236.0.170:8000/api/attraction/10>  
 + <http://13.236.0.170:8000/api/mrts>
+
+## If want to terminate nohup
+
+```shell
+ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ ps -ef | grep python
+root         590       1  0 09:25 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root         742       1  0 09:25 ?        00:00:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ubuntu      7175       1  0 14:39 ?        00:00:02 /usr/bin/python3 /usr/bin/uvicorn taipei-day-trip.app:app --host 0.0.0.0
+ubuntu      8065    8032  0 15:09 pts/0    00:00:00 grep --color=auto python
+
+ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ kill -s 9 7175
+```
