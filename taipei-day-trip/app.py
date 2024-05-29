@@ -11,7 +11,7 @@ DBpassword = os.getenv('DBpassword')
 
 mydb = mysql.connector.connect(
     host="localhost",
-    user="root",
+    user="jimmy",
     password=DBpassword,
     database="attractions"
 )
