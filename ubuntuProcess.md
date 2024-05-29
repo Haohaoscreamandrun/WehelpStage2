@@ -167,3 +167,11 @@ ubuntu@ip-172-31-36-243:~/WehelpStage2$ nohup uvicorn taipei-day-trip.app:app --
 1. 類型：自訂TCP
 2. 連接埠：8000
 3. 來源：0.0.0.0/0 (允許任何IP存取)
+
+## Submit pull request and comment as
+
++ <http://13.236.0.170/:8000/api/attractions?page=1>  
++ <http://13.236.0.170/:8000/api/attractions?page=0&keyword=劍潭>  
++ <http://13.236.0.170/:8000/api/attractions?page=0&keyword=北>  
++ <http://13.236.0.170/:8000/api/attraction/10>  
++ <http://13.236.0.170/:8000/api/mrts>
