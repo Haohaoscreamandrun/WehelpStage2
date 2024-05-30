@@ -179,11 +179,17 @@ ubuntu@ip-172-31-36-243:~/WehelpStage2$ nohup uvicorn taipei-day-trip.app:app --
 ## If want to terminate nohup
 
 ```shell
-ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ ps -ef | grep python
-root         590       1  0 09:25 ?        00:00:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
-root         742       1  0 09:25 ?        00:00:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
-ubuntu      7175       1  0 14:39 ?        00:00:02 /usr/bin/python3 /usr/bin/uvicorn taipei-day-trip.app:app --host 0.0.0.0
-ubuntu      8065    8032  0 15:09 pts/0    00:00:00 grep --color=auto python
+ubuntu@ip-172-31-36-243:~$ ps aux | grep uvicorn
+ubuntu      8077  0.1  4.0 239724 39608 ?        Sl   May29   0:43 /usr/bin/python3 /usr/bin/uvicorn app:app --host 0.0.0.0
+ubuntu     10239  0.0  0.2   7076  2048 pts/0    S+   01:30   0:00 grep --color=auto uvicorn
 
-ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ kill -s 9 7175
+ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ kill -s 9 8077
+
+## or just simply kill all uvicorn process
+ubuntu@ip-172-31-36-243:~$ ps aux | grep uvicorn
+ubuntu      8077  0.1  4.0 239724 39608 ?        Sl   May29   0:43 /usr/bin/python3 /usr/bin/uvicorn app:app --host 0.0.0.0
+ubuntu     10239  0.0  0.2   7076  2048 pts/0    S+   01:30   0:00 grep --color=auto uvicorn
+ubuntu@ip-172-31-36-243:~$ pkill uvicorn
+ubuntu@ip-172-31-36-243:~$ ps aux | grep uvicorn
+ubuntu     10242  0.0  0.2   7076  2048 pts/0    S+   01:31   0:00 grep --color=auto uvicorn
 ```
