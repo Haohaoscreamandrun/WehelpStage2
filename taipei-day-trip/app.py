@@ -42,18 +42,25 @@ async def thankyou(request: Request):
 
 @app.get("/api/attractions", response_class= JSONResponse)
 async def get_attractions(page: int = 0, keyword: str | None = None):
+	# fetch for 13 and return 12
 	try:
 		if keyword is None:
-			sql = "SELECT * FROM attractions LIMIT 12 OFFSET %s"
+			sql = "SELECT * FROM attractions LIMIT 13 OFFSET %s"
 			val = (page*12,)
 		else:
-			sql = "SELECT * FROM attractions WHERE name LIKE %s OR mrt LIKE %s LIMIT 12 OFFSET %s"
+			sql = "SELECT * FROM attractions WHERE name LIKE %s OR mrt LIKE %s LIMIT 13 OFFSET %s"
 			val = (f'%{keyword}%', f'%{keyword}%', page*12)
 		list = await fetchJSON(sql, val)
-		if len(list) > 0:
-			return JSONResponse(status_code=200, content={"nextPage":page+1 ,"data": list})
+		# Cond 1: There's data on next page, return only 12(Success)
+		if len(list) > 12:
+			return JSONResponse(status_code=200, content={"nextPage":page+1 ,"data": list[0:12]}) # return from 0 to 11, 12 not included
+		# Cond 2: There's no data on next page.(Success)
+		elif 12 >= len(list) > 0:
+			return JSONResponse(status_code=200, content={"nextPage": None, "data": list})
+		# Cond 3: No data is fetched even on first page.(Failed)
 		elif len(list) == 0 and page == 0:
 			return JSONResponse(status_code=500, content={"error": True, "message": "關鍵字查無資料"})
+		# Cond 4: No data is fetched.(Failed)
 		else:
 			return JSONResponse(status_code=500, content={"error": True, "message": "已達資料底端"})
 	except Exception as e:
