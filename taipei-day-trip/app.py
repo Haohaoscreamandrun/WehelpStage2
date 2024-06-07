@@ -25,7 +25,8 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 app=FastAPI()
 app.mount("/style", StaticFiles(directory="style"), name="style")
-
+app.mount("/source", StaticFiles(directory='source'), name='source')
+app.mount("/function",StaticFiles(directory="function"), name='function')
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)
 async def index(request: Request):

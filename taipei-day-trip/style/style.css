@@ -18,8 +18,8 @@ body
 
 .navbar
 {
-  /* flex item */
-  
+  background-color: #FFFFFF;
+  padding: 0 50%;
   /* flex container */
   display: flex;
   flex-direction: row;
@@ -68,7 +68,7 @@ body
 
 .searchbar
 {
-  background-image: url("/style/welcome.png");
+  background-image: url("/source/welcome.png");
   background-position: center start;
   background-size: cover;
   background-repeat: no-repeat;
@@ -151,7 +151,7 @@ body
   border-radius: 0 5px 5px 0;
   background-color: #448899;
 
-  background-image: url("/style/icon_search.png");
+  background-image: url("/source/icon_search.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center center;
@@ -211,21 +211,152 @@ body
 
 .scrollbar--scrollup--btn
 {
-  background-image: url("/style/left arrow.png");
+  background-image: url("/source/left arrow.png");
 }
 
 .scrollbar--scrolldown--btn
 {
-  background-image: url("/style/right arrow.png");
+  background-image: url("/source/right arrow.png");
 }
 
 .scrollbar--attractions
 {
   /* flex item */
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  max-width: 1100px;
   /* flex container */
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   align-items: center;
+  align-content: center;
+
+  padding: 13px 10px 13px 10px;
+
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scrollbar--attractions--list
+{
+  padding: 0 15px;
+  /* flex item */
+  
+  /* font */
+  font-size: 16px;
+  font-weight: 500;
+  color: #666666;
+
+  text-align: center;
+
+  /* transition: transform 0.5s ease; */
+}
+
+.hide {
+  display: none;
+}
+
+.gridbar
+{
+  padding-bottom: 100px;
+
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 270px 270px 270px 270px;
+  grid-template-rows: auto;
+}
+
+.gridbar--item
+{
+  /* flex container */
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.gridbar--item--imgcontainer
+{
+  height: 200px;
+  border-radius: 5px 5px 0 0;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  /* flex container */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gridbar--item--imgcontainer--name
+{
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px;
+  background-color: black;
+  opacity: 70%;
+
+  /* font */
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: start;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gridbar--item--detailcontainer
+{
+  box-sizing: border-box;
+  padding: 10px;
+
+  /* flex container */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gridbar--item--detailcontainer--mrt,
+.gridbar--item--detailcontainer--type
+{
+  /* font */
+  font-size: 16px;
+  font-weight: 500;
+  color: #757575;
+}
+
+.footerbar
+{
+  height: 100px;
+  width: 100%;
+  background-color: #757575;
+  text-align: center;
+  line-height: 100px;
+  text-wrap: nowrap;
+
+  /* font */
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 1170px){
+  .gridbar
+  {
+    grid-template-columns: 270px 270px;
+  }
+  .searchbar--container--searchform--input
+  {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .gridbar {
+    grid-template-columns: 270px;
+  }
 }
