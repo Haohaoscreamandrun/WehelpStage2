@@ -1,4 +1,13 @@
-let server = 'http://127.0.0.1:8000'
+
+// Get the current domain
+let currentDomain = window.location.hostname;
+
+// Get the current port
+let currentPort = window.location.port;
+
+// Combine domain and port
+let server = `http://${currentDomain}:${currentPort}`;
+console.log(server)
 let currentKeyword = ''
 
 async function fetchScrollBar(){
