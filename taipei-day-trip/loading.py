@@ -29,7 +29,7 @@ sql = 'CREATE TABLE attractions(\
 	lat DECIMAL(10, 8),\
 	lng DECIMAL(11, 8),\
 	images VARCHAR(2145)\
-	)'
+	)'# text
 
 try:
 	mycursor.execute(sql)
