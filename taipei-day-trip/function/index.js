@@ -38,7 +38,7 @@ async function fetchGrid(page=0, keyword='', reload=false){
     console.log("clear all content!")
   }
   
-  let response = await fetch(server + `/api/attractions?page=${page}&keyword=${keyword}`)
+  let response = fetch(server + `/api/attractions?page=${page}&keyword=${keyword}`)
   let gridAttraction = await response.json()
   
   if (!response.ok) {
@@ -58,10 +58,11 @@ async function fetchGrid(page=0, keyword='', reload=false){
     detailMRT.classList.add('gridbar--item--detailcontainer--mrt')
     detailType.classList.add('gridbar--item--detailcontainer--type')
     // assign value
-    imgContainer.style.backgroundImage = `url(${gridAttraction['data'][i]['images'][0]})`
-    imgName.innerText = gridAttraction['data'][i]['name']
-    detailMRT.innerText = gridAttraction['data'][i]['mrt']
-    detailType.innerText = gridAttraction['data'][i]['category']
+    let currentAttraction = gridAttraction['data'][i]
+    imgContainer.style.backgroundImage = `url(${currentAttraction['images'][0]})`
+    imgName.innerText = currentAttraction['name']
+    detailMRT.innerText = currentAttraction['mrt']
+    detailType.innerText = currentAttraction['category']
     // construct
     imgContainer.appendChild(imgName)
     detailContainer.appendChild(detailMRT)
@@ -90,25 +91,6 @@ function scrollClick(number){
   }
 }
 
-// function moveChildrenLeft(){
-//   if (scrollWindow){
-//     let children = scrollWindow.children;
-//     for (let i = 0; i < children.length; i++) {
-//       let child = children[i];
-//       child.style.transition = 'transform 0.5s ease';
-//       child.style.transform = 'translateX(-10%)';
-//   }
-// }}
-
-// function moveChildrenRight(){
-//   if (scrollWindow){
-//     let children = scrollWindow.children;
-//     for (let i = 0; i < children.length; i++) {
-//       let child = children[i];
-//       child.style.transition = 'transform 0.5s ease';
-//       child.style.transform = 'translateX(10%)';
-//   }
-// }}
 
 let scrollUpBtn = document.querySelector(".scrollbar--scrollup--btn")
 let scrollWindow = document.querySelector('.scrollbar--attractions')
@@ -117,8 +99,7 @@ let smallestDisplayChild = 0
 
 scrollUpBtn.addEventListener("click",() => scrollClick(-3))
 scrollDownBtn.addEventListener("click",() => scrollClick(+3))
-// scrollUpBtn.addEventListener("click",() => moveChildrenLeft())
-// scrollDownBtn.addEventListener("click",() => moveChildrenRight())
+
 
 fetchScrollBar()
 let nextPage = 0
