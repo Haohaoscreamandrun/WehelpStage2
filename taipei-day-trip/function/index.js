@@ -38,7 +38,7 @@ async function fetchGrid(page=0, keyword='', reload=false){
     console.log("clear all content!")
   }
   
-  let response = fetch(server + `/api/attractions?page=${page}&keyword=${keyword}`)
+  let response = await fetch(server + `/api/attractions?page=${page}&keyword=${keyword}`)
   let gridAttraction = await response.json()
   
   if (!response.ok) {
