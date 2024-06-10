@@ -253,6 +253,14 @@ body
   /* transition: transform 0.5s ease; */
 }
 
+.scrollbar--scrollup--btn:hover,
+.scrollbar--scrolldown--btn:hover,
+.scrollbar--attractions--list:hover,
+.searchbar--container--searchform--subbtn:hover
+{
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }

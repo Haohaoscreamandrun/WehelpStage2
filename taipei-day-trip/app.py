@@ -1,4 +1,5 @@
 # The line sys.stdout.reconfigure(encoding='utf-8') attempts to reconfigure the standard output stream(sys.stdout) to use UTF-8 encoding
+from mysql.connector import Error, pooling
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -9,14 +10,29 @@ import mysql.connector
 load_dotenv()
 DBpassword = os.getenv('DBpassword')
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="jimmy",
-    password=DBpassword,
-    database="attractions"
-)
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="jimmy",
+#     password=DBpassword,
+#     database="attractions"
+# )
  # can return dict list
 
+
+# connection pool
+dbconfig = {
+    'host' : "localhost",
+    'user' : "jimmy",
+    'password' : DBpassword,
+    'database' : "attractions"
+}
+cnxpool = pooling.MySQLConnectionPool(
+    pool_name="mypool",
+    pool_size=5,
+    # Reset session variables when the connection is returned to the pool.
+				pool_reset_session=True,
+				**dbconfig
+)
 
 # Server
 
@@ -53,7 +69,7 @@ async def get_attractions(page: int = 0, keyword: str | None = None):
 		else:
 			sql = "SELECT * FROM attractions WHERE name LIKE %s OR mrt LIKE %s LIMIT 13 OFFSET %s"
 			val = (f'%{keyword}%', f'%{keyword}%', page*12)
-		list = await fetchJSON(sql, val)
+		list = await fetchJSON(sql, val, True)
 		# Cond 1: There's data on next page, return only 12(Success)
 		if len(list) > 12:
 			return JSONResponse(status_code=200, content={"nextPage":page+1 ,"data": list[0:12]}) # return from 0 to 11, 12 not included
@@ -74,7 +90,7 @@ async def get_attraction_byID(attractionID: int):
 	try:
 		sql = "SELECT * FROM attractions WHERE id = %s"
 		val = (attractionID,)
-		list = await fetchJSON(sql, val)
+		list = await fetchJSON(sql, val, True)
 		if len(list) == 0:
 			return JSONResponse(status_code=400, content={"error": True, "message": "景點編號不正確"})
 		else:
@@ -87,11 +103,9 @@ async def get_attraction_byID(attractionID: int):
 async def get_MRTs():
 	try:
 		sql = "SELECT mrt FROM attractions\
-			GROUP BY mrt\
-			ORDER BY COUNT(name) DESC"
-		mycursor = mydb.cursor()
-		mycursor.execute(sql)
-		myresult = mycursor.fetchall()
+				GROUP BY mrt\
+				ORDER BY COUNT(name) DESC"
+		myresult = await fetchJSON(sql,None,False)
 		list = []
 		for mrt in myresult:
 			if mrt[0] is not None:
@@ -101,12 +115,22 @@ async def get_MRTs():
 		return JSONResponse(status_code=500, content={"error": True, "message": e})
 
 # Global function
-async def fetchJSON(sql, val):
-	mycursor = mydb.cursor(dictionary=True)
-	mycursor.execute(sql, val)
-	myresult = mycursor.fetchall()
-	for data in myresult:
-		data["lat"] = float(data["lat"]) # JSONresponse need a float type than decimal
-		data["lng"] = float(data["lng"])
-		data["images"] = data["images"].split(',')
-	return myresult
+async def fetchJSON(sql, val=None, dictionary=False):
+	try:
+		cnxconnection = cnxpool.get_connection()
+		if cnxconnection.is_connected():
+			mycursor = cnxconnection.cursor(dictionary=dictionary)
+			mycursor.execute(sql, val)
+			myresult = mycursor.fetchall()
+			for data in myresult:
+				data["lat"] = float(data["lat"]) # JSONresponse need a float type than decimal
+				data["lng"] = float(data["lng"])
+				data["images"] = data["images"].split(',')
+	except Error as e:
+			print("Error while connecting to MySQL using Connection pool ", e)
+	finally:
+		# close connection
+			mycursor.close()
+			cnxconnection.close()
+			print("MySQL connection is closed")
+			return myresult

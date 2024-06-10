@@ -58,7 +58,7 @@ async function fetchGrid(page=0, keyword='', reload=false){
     detailMRT.classList.add('gridbar--item--detailcontainer--mrt')
     detailType.classList.add('gridbar--item--detailcontainer--type')
     // assign value
-    imgContainer.style.backgroundImage = `url(${gridAttraction['data'][i]['images'][1]})`
+    imgContainer.style.backgroundImage = `url(${gridAttraction['data'][i]['images'][0]})`
     imgName.innerText = gridAttraction['data'][i]['name']
     detailMRT.innerText = gridAttraction['data'][i]['mrt']
     detailType.innerText = gridAttraction['data'][i]['category']
@@ -136,7 +136,7 @@ let nextPage = 0
 //   }
 // })
 
-
+// Intersection API
 let options = {
   root: null,
   rootMargin:"0px",
@@ -177,8 +177,10 @@ form.addEventListener("submit", submitForm)
 // click to search
 
 scrollWindow.addEventListener("click",(event)=>{
-    let queryString = event.target.innerText;
-    input.value = queryString
-    submitForm(event)
+    let targetClass = event.target.classList[0]
+    if (targetClass === 'scrollbar--attractions--list'){
+      let queryString = event.target.innerText;
+      input.value = queryString
+      submitForm(event)
+    }
   })
-

@@ -22,13 +22,13 @@ sql = 'CREATE TABLE attractions(\
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,\
 	name VARCHAR(20),\
 	category VARCHAR(5),\
-	description VARCHAR(1700),\
+	description TEXT,\
 	address VARCHAR(30),\
 	transport VARCHAR(500),\
 	mrt VARCHAR(10),\
 	lat DECIMAL(10, 8),\
 	lng DECIMAL(11, 8),\
-	images VARCHAR(2145)\
+	images TEXT\
 	)'# text
 
 try:
@@ -94,3 +94,5 @@ if len(myresult) == 0:
 			print(e)
 else:
 	print("Data is already inserted.")
+
+mydb.close()
