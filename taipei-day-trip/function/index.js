@@ -73,12 +73,10 @@ async function fetchGrid(page=0, keyword='', reload=false){
   }
 }
 }
-
-function scrollToggle(nth){
-  let element = document.querySelector(`.scrollbar--attractions--list:nth-child(${nth+1})`)
-  element.classList.toggle("hide");
-}
-
+let scrollUpBtn = document.querySelector(".scrollbar--scrollup--btn")
+let scrollWindow = document.querySelector('.scrollbar--attractions')
+let scrollDownBtn = document.querySelector(".scrollbar--scrolldown--btn")
+let smallestDisplayChild = 0
 let scrollAmount = 0;
 function scrollClick(direction){
   let scrollStep = 20;
@@ -98,31 +96,12 @@ function scrollClick(direction){
   
 }
 
-
-let scrollUpBtn = document.querySelector(".scrollbar--scrollup--btn")
-let scrollWindow = document.querySelector('.scrollbar--attractions')
-let scrollDownBtn = document.querySelector(".scrollbar--scrolldown--btn")
-let smallestDisplayChild = 0
-
 scrollUpBtn.addEventListener("click",() => scrollClick(-1))
 scrollDownBtn.addEventListener("click",() => scrollClick(+1))
 
 
 fetchScrollBar()
 let nextPage = 0
-// fetchGrid()
-
-//window.innerHeight: This is the height of the visible content. 視窗的長度
-
-// document.body.scrollHeight: This is the total height of the entire content, including both the visible and hidden parts.
-
-// window.scrollY: Indicates the position that the user has scrolled to. 往下捲了多少
-// document.addEventListener("scroll", ()=>{
-//   let isReachBottom = document.body.scrollHeight - 50 <= (window.scrollY + window.innerHeight)
-//   if (isReachBottom && nextPage != null) {
-//     fetchGrid(nextPage)
-//   }
-// })
 
 // Intersection API
 let options = {
