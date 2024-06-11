@@ -207,6 +207,7 @@ body
   background-repeat: no-repeat;
   background-position: center center;
   opacity: 50%;
+  transition: opacity 0.3s ease;
 }
 
 .scrollbar--scrollup--btn
@@ -234,9 +235,15 @@ body
 
   padding: 13px 10px 13px 10px;
 
-  overflow: hidden;
+  overflow-x: scroll; 
+  /* 出現滾動條 */
   white-space: nowrap;
 }
+
+.scrollbar--attractions::-webkit-scrollbar
+{display:none;}
+/* 隱藏滾動條 */
+
 
 .scrollbar--attractions--list
 {
@@ -250,7 +257,7 @@ body
 
   text-align: center;
 
-  /* transition: transform 0.5s ease; */
+  transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
 }
 
 .scrollbar--scrollup--btn:hover,
@@ -261,9 +268,22 @@ body
   cursor: pointer;
 }
 
-.hide {
-  display: none;
+.scrollbar--scrollup--btn:hover,
+.scrollbar--scrolldown--btn:hover
+{
+  opacity: 100%;
 }
+
+.scrollbar--attractions--list:hover
+{
+  background-color: #666666;
+  color:#FFFFFF;
+  border-radius: 30px;
+}
+
+/* .hide {
+  display: none;
+} */
 
 .gridbar
 {

@@ -79,16 +79,23 @@ function scrollToggle(nth){
   element.classList.toggle("hide");
 }
 
-function scrollClick(number){
-  for (let i = 0 ; i < Math.abs(number); i++){
-    if (number < 0 && smallestDisplayChild !== 0){
-      smallestDisplayChild -= 1
-      scrollToggle(smallestDisplayChild)
-    }else if((number > 0 && scrollWindow.scrollWidth > scrollWindow.clientWidth)){
-      scrollToggle(smallestDisplayChild)
-      smallestDisplayChild += 1
+let scrollAmount = 0;
+function scrollClick(direction){
+  let scrollStep = 20;
+  let slideTimer = setInterval(()=>{
+    scrollWindow.scrollLeft += direction * scrollStep
+    scrollAmount += direction * scrollStep;
+    let isReachRightEnd = scrollWindow.scrollLeft === scrollWindow.scrollWidth-scrollWindow.offsetWidth
+    let isReachLeftEnd = scrollWindow.scrollLeft === 0
+    if (Math.abs(scrollAmount) === 200){
+      scrollAmount = 0
+      clearInterval(slideTimer)
+    }else if(isReachRightEnd || isReachLeftEnd){
+      scrollAmount = 0
+      clearInterval(slideTimer)
     }
-  }
+  },15)
+  
 }
 
 
@@ -97,8 +104,8 @@ let scrollWindow = document.querySelector('.scrollbar--attractions')
 let scrollDownBtn = document.querySelector(".scrollbar--scrolldown--btn")
 let smallestDisplayChild = 0
 
-scrollUpBtn.addEventListener("click",() => scrollClick(-3))
-scrollDownBtn.addEventListener("click",() => scrollClick(+3))
+scrollUpBtn.addEventListener("click",() => scrollClick(-1))
+scrollDownBtn.addEventListener("click",() => scrollClick(+1))
 
 
 fetchScrollBar()
