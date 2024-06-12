@@ -413,6 +413,7 @@ body
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  transition: background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .bookingbar--imgcontainer--lastbtn,
@@ -428,6 +429,13 @@ body
   background-position: center center;
   opacity: 75%;
   transition: opacity 0.3s ease;
+}
+
+.bookingbar--imgcontainer--lastbtn:hover,
+.bookingbar--imgcontainer--nextbtn:hover
+{
+  cursor: pointer;
+  opacity: 100%;
 }
 
 .bookingbar--imgcontainer--lastbtn {
@@ -529,6 +537,7 @@ body
 #bookingbar--bookingpanel--bookingform--date--dateinput
 {
   width: 33%;
+  border: #FFFFFF;
 }
 
 .bookingbar--bookingpanel--bookingform--time--timelabel,
@@ -537,6 +546,25 @@ body
   /* font */
   font-weight: 400;
   font-size: 16px;
+}
+
+input[type='radio'] 
+{
+  appearance: none;
+
+  width: 18px;
+  height: 18px;
+  
+  border: 9px solid #FFFFFF;
+  transition: 0.2s all linear;
+  border-radius: 50%;
+  
+  /* background-color: #E8E8E8; */
+}
+
+input[type='radio']:checked
+{
+  border: #448899 9px solid;
 }
 
 .bookingbar--bookingpanel--bookingform--submit

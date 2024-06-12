@@ -4,10 +4,15 @@ let nextImageBtn = document.querySelector(".bookingbar--imgcontainer--nextbtn")
 let attractionTitle = document.querySelector(".bookingbar--bookingpanel--title")
 let attractionType = document.querySelector(".bookingbar--bookingpanel--type")
 let bookingForm = document.querySelector(".bookingbar--bookingpanel--bookingform")
+let bookingTimeRadio = document.querySelectorAll('input[name="bookingTime"]')
+let bookingDate = document.querySelector("#bookingbar--bookingpanel--bookingform--date--dateinput")
 let bookingPrice = document.querySelector(".bookingbar--bookingpanel--bookingform--price--ntd")
 let attractionDescription = document.querySelector(".detailbar--description")
 let attractionAddress = document.querySelector(".detailbar--addressdiv--address")
 let attractionTransport = document.querySelector(".detailbar--transportdiv--transportation")
+let imgsURL = [];
+let preloadImgList = [];
+let pageCount = 0;
 
 // Get the current url
 let url = window.location.href
@@ -32,6 +37,53 @@ async function fetchAttraction(attractionID){
   attractionDescription.innerText = jsonList['description']
   attractionAddress.innerText = jsonList['address']
   attractionTransport.innerText = jsonList['transport']
+
+  // return list for later use
+  imgsURL = jsonList['images']
 }
 
-fetchAttraction(attractionID)
+// pre-load img
+async function preloadImages(imgsURL){
+  await imgsURL.forEach(url => {
+    let img = new Image();
+    img.src = url
+    preloadImgList.push(img)
+  })
+}
+
+// pagination btn
+function pagination(direction) {
+  pageCount += direction
+  if (pageCount < 0){
+    pageCount = preloadImgList.length - 1
+  }else if (pageCount === preloadImgList.length){
+    pageCount = 0
+  }
+  imgContainer.style.opacity = 0;
+  imgContainer.style.backgroundImage = `url(${preloadImgList[pageCount].src})` //Won't fetch url again since already preloaded
+  imgContainer.style.opacity = 1;
+  
+}
+
+async function flow(){
+  await fetchAttraction(attractionID)
+  await preloadImages(imgsURL)
+  lastImageBtn.addEventListener("click", () => pagination(-1))
+  nextImageBtn.addEventListener("click", () => pagination(+1))
+}
+
+flow()
+
+// Change price based on time
+function changeBookingPrice(event){
+  let selected = event.target.value
+  if (selected === '上半天'){
+    bookingPrice.innerText = '新台幣 2000 元'
+  }else if (selected === '下半天'){
+    bookingPrice.innerText = '新台幣 2500 元'
+  }
+}
+
+bookingTimeRadio.forEach((button)=>{
+  button.addEventListener("change", changeBookingPrice) //called immediately when addEventListener is executed 
+})
