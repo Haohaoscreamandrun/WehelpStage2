@@ -63,6 +63,10 @@ async function fetchGrid(page=0, keyword='', reload=false){
     imgName.innerText = currentAttraction['name']
     detailMRT.innerText = currentAttraction['mrt']
     detailType.innerText = currentAttraction['category']
+    // add listener
+    gridItem.addEventListener('click', function(){
+      window.location.href = `${server}/attraction/${currentAttraction['id']}`
+    })
     // construct
     imgContainer.appendChild(imgName)
     detailContainer.appendChild(detailMRT)
