@@ -378,6 +378,222 @@ body
   color: #FFFFFF;
 }
 
+.bookingbar
+{
+/* flex container */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* size */
+  max-width: 1200px;
+  width: 100%;
+  height: 400px;
+
+  margin: 40px 0 60px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.bookingbar--imgcontainer
+{
+  /* flex container */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* size */
+  height: 100%;
+  width: 45%;
+  border-radius: 5px;
+
+  /* background */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bookingbar--imgcontainer--lastbtn,
+.bookingbar--imgcontainer--nextbtn
+{
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  border: #666666 2px solid;
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 75%;
+  transition: opacity 0.3s ease;
+}
+
+.bookingbar--imgcontainer--lastbtn {
+  background-image: url("/source/left arrow.png");
+  margin-left: 10px;
+}
+
+.bookingbar--imgcontainer--nextbtn {
+  background-image: url("/source/right arrow.png");
+  margin-right: 10px;
+}
+
+.bookingbar--bookingpanel
+{
+  /* flex container */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  /* size */
+  height: 100%;
+  width: 50%;
+  
+}
+
+.bookingbar--bookingpanel--title
+{
+  /* font */
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.bookingbar--bookingpanel--type
+{
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.bookingbar--bookingpanel--bookingform
+{
+  /* flex container */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  /* size */
+  height: 75%;
+  width: 100%;
+
+  background-color: #E8E8E8;
+  padding: 15px 20px;
+  border-radius: 5px;
+
+  box-sizing: border-box;
+}
+
+.bookingbar--bookingpanel--bookingform--title
+{
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+
+  width: 100%;
+}
+
+.bookingbar--bookingpanel--bookingform--description
+{
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+
+  width: 100%;
+}
+
+.bookingbar--bookingpanel--bookingform--date,
+.bookingbar--bookingpanel--bookingform--time,
+.bookingbar--bookingpanel--bookingform--price
+{
+  /* flex container */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+}
+
+.bookingbar--bookingpanel--bookingform--date--datelabel,
+.bookingbar--bookingpanel--bookingform--time--timediv,
+.bookingbar--bookingpanel--bookingform--price--label
+{
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+}
+
+#bookingbar--bookingpanel--bookingform--date--dateinput
+{
+  width: 33%;
+}
+
+.bookingbar--bookingpanel--bookingform--time--timelabel,
+.bookingbar--bookingpanel--bookingform--price--ntd
+{
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.bookingbar--bookingpanel--bookingform--submit
+{
+  margin-bottom: 5%;  
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #448899;
+
+  font-weight: 400;
+  font-size: 19px;
+  color: #FFFFFF;
+  text-align: center;
+  /* text-overflow: nowrap; */
+}
+
+.seperation
+{
+  border: 1px solid #E8E8E8;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.detailbar
+{
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px 0 80px;
+  padding: 10px;
+
+  box-sizing: border-box;
+  color: #666666;
+  text-align: start;
+}
+
+.detailbar--addressdiv,
+.detailbar--transportdiv
+{
+  margin-top: 20px;
+}
+
+.detailbar--description,
+.detailbar--addressdiv--address
+{
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.detailbar--addressdiv--title,
+.detailbar--transportdiv--title
+{
+  font-weight: 700;
+  font-size: 16px;
+}
+
+
 @media screen and (max-width: 1170px){
   .gridbar
   {
@@ -387,10 +603,41 @@ body
   {
     width: 50vw;
   }
+  .seperation 
+  {
+    width: 95%;
+  }
+  .detailbar {
+    width: 95%;
+    padding: 0 5px;
+  }
 }
 
 @media screen and (max-width: 570px) {
   .gridbar {
     grid-template-columns: 270px;
+  }
+  .bookingbar
+  {
+    height: auto;
+    flex-direction: column;
+    margin: 0 0 40px;
+  }
+  .bookingbar--imgcontainer
+  {
+    width: 100%;
+    min-height: 350px;
+  }
+  .bookingbar--bookingpanel
+  {
+    width: 100%;
+    min-height: 390px;
+    padding: 20px 10px 0;
+
+    box-sizing: border-box;
+  }
+  .bookingbar--bookingpanel--bookingform
+  {
+    height: 300px;
   }
 }

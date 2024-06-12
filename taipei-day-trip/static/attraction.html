@@ -4,8 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Attraction</title>
+  <link rel="stylesheet" href="/style/style.css">
 </head>
+<script defer src="/function/attraction.js"></script>
 <body>
-  
+  <div class="navbar">
+    <div class="navbar--title">台北一日遊</div>
+    <div class="navbar--navcontainer">
+      <div class="navbar--navcontainer--navbtn">預定行程</div>
+      <div class="navbar--navcontainer--navbtn">登入/註冊</div>
+    </div>
+  </div>
+  <div class="bookingbar">
+    <div class="bookingbar--imgcontainer">
+      <div class="bookingbar--imgcontainer--lastbtn"></div>
+      <div class="bookingbar--imgcontainer--nextbtn"></div>
+    </div>
+    <div class="bookingbar--bookingpanel">
+      <div class="bookingbar--bookingpanel--title"></div>
+      <div class="bookingbar--bookingpanel--type"></div>
+      <form class="bookingbar--bookingpanel--bookingform">
+        <div class="bookingbar--bookingpanel--bookingform--title">訂購導覽行程</div>
+        <div class="bookingbar--bookingpanel--bookingform--description">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+        <div class="bookingbar--bookingpanel--bookingform--date">
+          <label for="bookingbar--bookingpanel--bookingform--date--dateinput"
+          class="bookingbar--bookingpanel--bookingform--date--datelabel">選擇日期：</label>
+          <input type="date" name="bookingDate" id="bookingbar--bookingpanel--bookingform--date--dateinput">
+        </div>
+        <div class="bookingbar--bookingpanel--bookingform--time">
+          <div class="bookingbar--bookingpanel--bookingform--time--timediv">選擇時間：</div>
+          <input type="radio" name="bookingTime" value="上半天"   id="bookingbar--bookingpanel--bookingform--time--timeinput1">
+          <label for="bookingbar--bookingpanel--bookingform--time--timeinput1" class="bookingbar--bookingpanel--bookingform--time--timelabel">上半天</label>
+          <input type="radio" name="bookingTime" value="下半天" id="bookingbar--bookingpanel--bookingform--time--timeinput2">
+          <label for="bookingbar--bookingpanel--bookingform--time--timeinput2"
+            class="bookingbar--bookingpanel--bookingform--time--timelabel">下半天</label>
+        </div>
+        <div class="bookingbar--bookingpanel--bookingform--price">
+          <div class="bookingbar--bookingpanel--bookingform--price--label">導覽費用：</div>
+          <div class="bookingbar--bookingpanel--bookingform--price--ntd">新台幣 2000 元</div>
+        </div>
+        <button type="submit" class="bookingbar--bookingpanel--bookingform--submit">開始預約行程</button>
+      </form>
+    </div>
+  </div>
+  <div class="seperation"></div>
+  <div class="detailbar">
+    <div class="detailbar--description"></div>
+    <div class="detailbar--addressdiv">
+      <div class="detailbar--addressdiv--title">景點地址：</div>
+      <div class="detailbar--addressdiv--address"></div>
+    </div>
+    <div class="detailbar--transportdiv">
+      <div class="detailbar--transportdiv--title">交通方式：</div>
+      <div class="detailbar--transportdiv--transportation"></div>
+    </div>
+  </div>
+  <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
 </body>
 </html>

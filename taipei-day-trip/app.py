@@ -113,7 +113,7 @@ async def get_MRTs():
 		return JSONResponse(status_code=200, content={"data": list})
 	except Exception as e:
 		return JSONResponse(status_code=500, content={"error": True, "message": e})
-
+	
 # Global function
 async def fetchJSON(sql, val=None, dictionary=False):
 	try:
