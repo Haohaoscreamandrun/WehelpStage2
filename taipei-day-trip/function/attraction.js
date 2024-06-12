@@ -1,6 +1,7 @@
 let imgContainer = document.querySelector(".bookingbar--imgcontainer")
 let lastImageBtn = document.querySelector(".bookingbar--imgcontainer--lastbtn")
 let nextImageBtn = document.querySelector(".bookingbar--imgcontainer--nextbtn")
+let paginationMark = document.querySelector(".bookingbar--imgcontainer--pagination")
 let attractionTitle = document.querySelector(".bookingbar--bookingpanel--title")
 let attractionType = document.querySelector(".bookingbar--bookingpanel--type")
 let bookingForm = document.querySelector(".bookingbar--bookingpanel--bookingform")
@@ -38,6 +39,15 @@ async function fetchAttraction(attractionID){
   attractionAddress.innerText = jsonList['address']
   attractionTransport.innerText = jsonList['transport']
 
+  // create pagination
+  for (let i = 0; i < jsonList['images'].length; i++){
+    let circleDiv = document.createElement('div')
+    circleDiv.classList.add("bookingbar--imgcontainer--pagination--pages")
+    if (i === 0){circleDiv.classList.add("page--checked")}
+    circleDiv.id = `pages__${i}`
+    paginationMark.appendChild(circleDiv)
+  }
+
   // return list for later use
   imgsURL = jsonList['images']
 }
@@ -53,17 +63,32 @@ async function preloadImages(imgsURL){
 
 // pagination btn
 function pagination(direction) {
+  //clear dots
+  let lastDot = document.getElementById(`pages__${pageCount}`)
+  lastDot.classList.toggle("page--checked")
+
   pageCount += direction
   if (pageCount < 0){
-    pageCount = preloadImgList.length - 1
-  }else if (pageCount === preloadImgList.length){
-    pageCount = 0
+    pageCount = preloadImgList.length + direction
+  }else if (pageCount >= preloadImgList.length){
+    pageCount = pageCount - preloadImgList.length
   }
+  // load picture
   imgContainer.style.opacity = 0;
   imgContainer.style.backgroundImage = `url(${preloadImgList[pageCount].src})` //Won't fetch url again since already preloaded
   imgContainer.style.opacity = 1;
-  
+  // add class to dots
+  let currentDot = document.getElementById(`pages__${pageCount}`)
+  currentDot.classList.toggle("page--checked")
 }
+
+paginationMark.addEventListener('click',(event)=>{
+  if(event.target.classList.value === "bookingbar--imgcontainer--pagination--pages"){
+    let targetID = event.target.id
+    let jumpPage = targetID.split("__")[1]
+    pagination(parseInt(jumpPage)-pageCount)
+  }
+})
 
 async function flow(){
   await fetchAttraction(attractionID)

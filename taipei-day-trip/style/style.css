@@ -455,6 +455,50 @@ body
   margin-right: 10px;
 }
 
+.bookingbar--imgcontainer--pagination
+{
+  /* flex container */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;  
+  /* flex item */
+  align-self: flex-end;
+
+  margin-bottom: 10px;
+}
+
+.bookingbar--imgcontainer--pagination--pages
+{
+  /* size */
+  width: 12px;
+  height: 12px;
+  
+  /* margin */
+  margin: 0 6px;
+  border-radius: 50%;
+
+  /* color */
+  border: #FFFFFF solid 1px;
+  background-color: #FFFFFF;
+  opacity: 75%;
+
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.page--checked
+{
+  background-color: #000000;
+  opacity: 1;
+
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.bookingbar--imgcontainer--pagination--pages:hover
+{
+  cursor: pointer;
+}
+
 .bookingbar--bookingpanel
 {
   /* flex container */
