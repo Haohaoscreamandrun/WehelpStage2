@@ -1,3 +1,4 @@
+let homePage = document.querySelector(".navbar--title")
 let imgContainer = document.querySelector(".bookingbar--imgcontainer")
 let lastImageBtn = document.querySelector(".bookingbar--imgcontainer--lastbtn")
 let nextImageBtn = document.querySelector(".bookingbar--imgcontainer--nextbtn")
@@ -112,3 +113,7 @@ function changeBookingPrice(event){
 bookingTimeRadio.forEach((button)=>{
   button.addEventListener("change", changeBookingPrice) //called immediately when addEventListener is executed 
 })
+
+homePage.addEventListener('click', function(){
+    window.location.href = `${urlParts.slice(0,3).join("/")}`
+  })

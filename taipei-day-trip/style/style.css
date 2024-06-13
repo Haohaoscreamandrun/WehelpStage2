@@ -45,6 +45,11 @@ body
   color: #448899;
 }
 
+.navbar--title:hover
+{
+  cursor: pointer;
+}
+
 .navbar--navcontainer
 {
   /* flex item */
@@ -652,6 +657,11 @@ input[type='radio']:checked
   max-width: 1200px;
 }
 
+.first
+{
+  max-width: none;
+}
+
 .detailbar
 {
   width: 100%;
@@ -694,7 +704,7 @@ input[type='radio']:checked
   {
     width: 50vw;
   }
-  .seperation 
+  .second 
   {
     width: 95%;
   }
