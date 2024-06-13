@@ -592,8 +592,8 @@ body
   padding: 5px 10px;
 
   /* font */
-    font-weight: 400;
-    font-size: 16px;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .bookingbar--bookingpanel--bookingform--time--timelabel,
@@ -608,14 +608,15 @@ input[type='radio']
 {
   appearance: none;
 
+  box-sizing: border-box;
   width: 18px;
   height: 18px;
   
-  border: 9px solid #FFFFFF;
+  border: 2px solid #FFFFFF;
   transition: 0.2s all linear;
   border-radius: 50%;
   
-  /* background-color: #E8E8E8; */
+  background-color: #FFFFFF;
 }
 
 input[type='radio']:hover
@@ -625,7 +626,8 @@ input[type='radio']:hover
 
 input[type='radio']:checked
 {
-  border: #448899 9px solid;
+  /* border: #448899 8px solid; */
+    background-color: #448899;
 }
 
 .bookingbar--bookingpanel--bookingform--submit
