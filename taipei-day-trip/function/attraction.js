@@ -74,9 +74,9 @@ function pagination(direction) {
     pageCount = pageCount - preloadImgList.length
   }
   // load picture
-  imgContainer.style.opacity = 0;
+  
   imgContainer.style.backgroundImage = `url(${preloadImgList[pageCount].src})` //Won't fetch url again since already preloaded
-  imgContainer.style.opacity = 1;
+
   // add class to dots
   let currentDot = document.getElementById(`pages__${pageCount}`)
   currentDot.classList.toggle("page--checked")

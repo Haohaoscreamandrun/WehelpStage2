@@ -420,7 +420,7 @@ body
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  transition: background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: 0.2s all ease-out;
 }
 
 .bookingbar--imgcontainer--lastbtn,
