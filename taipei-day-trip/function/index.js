@@ -58,10 +58,15 @@ async function fetchGrid(page=0, keyword='', reload=false){
     detailMRT.classList.add('gridbar--item--detailcontainer--mrt')
     detailType.classList.add('gridbar--item--detailcontainer--type')
     // assign value
-    imgContainer.style.backgroundImage = `url(${gridAttraction['data'][i]['images'][1]})`
-    imgName.innerText = gridAttraction['data'][i]['name']
-    detailMRT.innerText = gridAttraction['data'][i]['mrt']
-    detailType.innerText = gridAttraction['data'][i]['category']
+    let currentAttraction = gridAttraction['data'][i]
+    imgContainer.style.backgroundImage = `url(${currentAttraction['images'][0]})`
+    imgName.innerText = currentAttraction['name']
+    detailMRT.innerText = currentAttraction['mrt']
+    detailType.innerText = currentAttraction['category']
+    // add listener
+    gridItem.addEventListener('click', function(){
+      window.location.href = `${server}/attraction/${currentAttraction['id']}`
+    })
     // construct
     imgContainer.appendChild(imgName)
     detailContainer.appendChild(detailMRT)
@@ -72,71 +77,37 @@ async function fetchGrid(page=0, keyword='', reload=false){
   }
 }
 }
-
-function scrollToggle(nth){
-  let element = document.querySelector(`.scrollbar--attractions--list:nth-child(${nth+1})`)
-  element.classList.toggle("hide");
-}
-
-function scrollClick(number){
-  for (let i = 0 ; i < Math.abs(number); i++){
-    if (number < 0 && smallestDisplayChild !== 0){
-      smallestDisplayChild -= 1
-      scrollToggle(smallestDisplayChild)
-    }else if((number > 0 && scrollWindow.scrollWidth > scrollWindow.clientWidth)){
-      scrollToggle(smallestDisplayChild)
-      smallestDisplayChild += 1
-    }
-  }
-}
-
-// function moveChildrenLeft(){
-//   if (scrollWindow){
-//     let children = scrollWindow.children;
-//     for (let i = 0; i < children.length; i++) {
-//       let child = children[i];
-//       child.style.transition = 'transform 0.5s ease';
-//       child.style.transform = 'translateX(-10%)';
-//   }
-// }}
-
-// function moveChildrenRight(){
-//   if (scrollWindow){
-//     let children = scrollWindow.children;
-//     for (let i = 0; i < children.length; i++) {
-//       let child = children[i];
-//       child.style.transition = 'transform 0.5s ease';
-//       child.style.transform = 'translateX(10%)';
-//   }
-// }}
-
 let scrollUpBtn = document.querySelector(".scrollbar--scrollup--btn")
 let scrollWindow = document.querySelector('.scrollbar--attractions')
 let scrollDownBtn = document.querySelector(".scrollbar--scrolldown--btn")
 let smallestDisplayChild = 0
+let scrollAmount = 0;
+function scrollClick(direction){
+  let scrollStep = 20;
+  let slideTimer = setInterval(()=>{
+    scrollWindow.scrollLeft += direction * scrollStep
+    scrollAmount += direction * scrollStep;
+    let isReachRightEnd = scrollWindow.scrollLeft === scrollWindow.scrollWidth-scrollWindow.offsetWidth
+    let isReachLeftEnd = scrollWindow.scrollLeft === 0
+    if (Math.abs(scrollAmount) === 200){
+      scrollAmount = 0
+      clearInterval(slideTimer)
+    }else if(isReachRightEnd || isReachLeftEnd){
+      scrollAmount = 0
+      clearInterval(slideTimer)
+    }
+  },15)
+  
+}
 
-scrollUpBtn.addEventListener("click",() => scrollClick(-3))
-scrollDownBtn.addEventListener("click",() => scrollClick(+3))
-// scrollUpBtn.addEventListener("click",() => moveChildrenLeft())
-// scrollDownBtn.addEventListener("click",() => moveChildrenRight())
+scrollUpBtn.addEventListener("click",() => scrollClick(-1))
+scrollDownBtn.addEventListener("click",() => scrollClick(+1))
+
 
 fetchScrollBar()
 let nextPage = 0
-// fetchGrid()
 
-//window.innerHeight: This is the height of the visible content. 視窗的長度
-
-// document.body.scrollHeight: This is the total height of the entire content, including both the visible and hidden parts.
-
-// window.scrollY: Indicates the position that the user has scrolled to. 往下捲了多少
-// document.addEventListener("scroll", ()=>{
-//   let isReachBottom = document.body.scrollHeight - 50 <= (window.scrollY + window.innerHeight)
-//   if (isReachBottom && nextPage != null) {
-//     fetchGrid(nextPage)
-//   }
-// })
-
-
+// Intersection API
 let options = {
   root: null,
   rootMargin:"0px",
@@ -177,8 +148,10 @@ form.addEventListener("submit", submitForm)
 // click to search
 
 scrollWindow.addEventListener("click",(event)=>{
-    let queryString = event.target.innerText;
-    input.value = queryString
-    submitForm(event)
+    let targetClass = event.target.classList[0]
+    if (targetClass === 'scrollbar--attractions--list'){
+      let queryString = event.target.innerText;
+      input.value = queryString
+      submitForm(event)
+    }
   })
-
