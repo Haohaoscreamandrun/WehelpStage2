@@ -1,4 +1,3 @@
-
 // Get the current domain
 let currentDomain = window.location.hostname;
 
@@ -7,7 +6,6 @@ let currentPort = window.location.port;
 
 // Combine domain and port
 let server = `http://${currentDomain}:${currentPort}`;
-console.log(server)
 let currentKeyword = ''
 
 async function fetchScrollBar(){
@@ -155,3 +153,13 @@ scrollWindow.addEventListener("click",(event)=>{
       submitForm(event)
     }
   })
+
+// Click to login
+let loginButton = document.querySelector("#navbar--navcontainer--login")
+loginButton.addEventListener('click',()=>{
+  console.log('clicked')
+  let background = document.querySelector(".popupbackground")
+  let popUp = document.querySelector(".popupbar")
+  background.style.display = 'block'
+  popUp.style.display = 'block'
+})

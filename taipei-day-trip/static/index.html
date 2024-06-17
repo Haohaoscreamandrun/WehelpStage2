@@ -12,7 +12,7 @@
     <div class="navbar--title">台北一日遊</div>
     <div class="navbar--navcontainer">
       <div class="navbar--navcontainer--navbtn">預定行程</div>
-      <div class="navbar--navcontainer--navbtn">登入/註冊</div>
+      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--login">登入/註冊</div>
     </div>
   </div>
   <div class="searchbar">
@@ -46,5 +46,18 @@
       
   </div>
   <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
+  <div class="popupbackground"></div>
+  <div class="popupbar">
+    <div class="popupbar--popup">
+      <form class="popupbar--popup--form">
+        <div class="popupbar--popup--form--title">登入會員帳號</div>
+        <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input" placeholder="輸入電子信箱">
+        <input type="password" name="inputPassword" id="popupbar--popup--form--password" class="popupbar--popup--form--input" placeholder="輸入密碼">
+        <input type="submit" value="登入帳戶" class="popupbar--popup--form--submit">
+        <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
+      </form>
+      <div class="popupbar--popup--closebtn"></div>
+    </div>
+  </div>
 </body>
 </html>
