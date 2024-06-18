@@ -170,6 +170,10 @@ closeLoginButton.addEventListener("click",()=>{
   let popUp = document.querySelector(".popupbar")
   background.style.display = 'none'
   popUp.classList.toggle("showing")
+  let popUpForm = document.querySelector(".popupbar--popup--form")
+  popUpForm.reset()
+  let updateMessage = document.querySelector(".popupbar--popup--form--warning")
+  updateMessage.innerText = ""
 })
 
 // Switching between Sign-in and sign-up
@@ -240,11 +244,14 @@ async function signUpValidation(event){
         },
         body: request
       })
-      if (!response.ok){
-        throw new Error("Network response is not ok")
-      }
       response = await response.json()
-      console.log(response)
+      let updateMessage = document.querySelector(".popupbar--popup--form--warning")
+      if (response.error) {
+        updateMessage.innerText = response.message
+      } else if (response["ok"]){
+        updateMessage.innerText = "註冊成功"
+      }
+
     }catch(error){
       console.error(error)
     }

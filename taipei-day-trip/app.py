@@ -145,24 +145,27 @@ async def sign_up(request: Request, user: User):
                 WHERE email = %s'
         val = (email,)
         myresult = await fetchJSON(sql, val, False)
-        for member in myresult:
-            print(member)
-            if member[0] is None:
-                response = {
-                    "ok": True
-                }
-                sql = 'INSERT INTO member\
-                        (name, email, password)\
-                        VALUES (%s, %s, %s)'
-                val = (name, email, password,)
-                fetchJSON(sql,val,False)
-                return JSONResponse(status_code=200, content=response)
-            elif member[0] is not None:
-                response = {
-                    "error": True,
-                    "message": "電子郵件已被註冊"
-                }
-                return JSONResponse(status_code = 400, content = response)
+        
+        # Cond1: No exist email.
+        if len(myresult) == 0:
+            print("Email not exist.")
+            response = {
+                "ok": True
+            }
+            sql = 'INSERT INTO member\
+                    (name, email, password)\
+                    VALUES (%s, %s, %s)'
+            val = (name, email, password,)
+            commitDB(sql,val)
+            return JSONResponse(status_code=200, content=response)
+        # Cond2: Email exist
+        elif len(myresult) != 0:
+            print("Email is already existed")
+            response = {
+                "error": True,
+                "message": "電子郵件已被註冊"
+            }
+            return JSONResponse(status_code = 400, content = response)
     except Error as e:
         response = {
             "error": True,
@@ -178,12 +181,11 @@ async def fetchJSON(sql, val=None, dictionary=False):
         mycursor = cnxconnection.cursor(dictionary=dictionary)
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
-        print(myresult)
-        if (len(myresult) == 0):
-            cnxconnection.commit()
-            print(mycursor.rowcount, "record inserted.")
+        
         for data in myresult:
+            # parse for grid data
             if (len(data) > 1):
+                print("fetch JSONresponse, parse data type.")
             # JSONresponse need a float type than decimal
                 data["lat"] = float(data["lat"])
                 data["lng"] = float(data["lng"])
@@ -197,3 +199,18 @@ async def fetchJSON(sql, val=None, dictionary=False):
         cnxconnection.close()
         print("MySQL connection is closed")
         return myresult
+
+def commitDB(sql, val=None):
+    try:
+        cnxconnection = cnxpool.get_connection()
+        mycursor = cnxconnection.cursor()
+        mycursor.execute(sql, val)
+        cnxconnection.commit()
+        print(mycursor.rowcount, "record inserted.")
+    except Error as e:
+        print("Error while connecting to MySQL using Connection pool ", e)
+    finally:
+        # close connection
+        mycursor.close()
+        cnxconnection.close()
+        print("MySQL connection is closed")
