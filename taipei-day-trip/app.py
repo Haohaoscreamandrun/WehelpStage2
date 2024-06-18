@@ -6,6 +6,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 from mysql.connector import Error, pooling
+from pydantic import BaseModel
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -126,8 +127,18 @@ async def get_MRTs():
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": True, "message": e})
 
-# Global function
+# User registration
+class User(BaseModel):
+    name: str
+    email: str
+    password: str
 
+@app.post("/api/user", response_class=JSONResponse)
+async def sign_up(request: Request, user: User):
+    name, email, password = (s.strip() for s in (user.name, user.email, user.password))
+    print("Strip info:", name, email, password)
+
+# Global function
 
 async def fetchJSON(sql, val=None, dictionary=False):
     try:

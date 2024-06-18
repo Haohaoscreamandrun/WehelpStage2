@@ -157,9 +157,63 @@ scrollWindow.addEventListener("click",(event)=>{
 // Click to login
 let loginButton = document.querySelector("#navbar--navcontainer--login")
 loginButton.addEventListener('click',()=>{
-  console.log('clicked')
   let background = document.querySelector(".popupbackground")
   let popUp = document.querySelector(".popupbar")
   background.style.display = 'block'
-  popUp.style.display = 'block'
+  popUp.classList.toggle("showing")
 })
+
+// Click to close login panel
+let closeLoginButton = document.querySelector(".popupbar--popup--closebtn")
+closeLoginButton.addEventListener("click",()=>{
+  let background = document.querySelector(".popupbackground")
+  let popUp = document.querySelector(".popupbar")
+  background.style.display = 'none'
+  popUp.classList.toggle("showing")
+})
+
+// Switching between Sign-in and sign-up
+let switchButton = document.querySelector(".popupbar--popup--form--switch")
+switchButton.addEventListener('click', ()=>{
+  
+  let popUp = document.querySelector(".popupbar")
+  popUp.classList.toggle("showing")
+  
+  setTimeout(() => {
+
+    let popUpForm = document.querySelector(".popupbar--popup--form")
+    let popUpTitle = document.querySelector(".popupbar--popup--form--title")
+    let inputEmail = document.querySelector("#popupbar--popup--form--email")
+    let submitBtn = document.querySelector(".popupbar--popup--form--submit")
+    
+    if (popUpForm.id === "signin"){
+      popUpTitle.innerText = "註冊會員帳號"
+      let inputName = document.createElement('input')
+      inputName.type = "text"
+      inputName.name = "inputName"
+      inputName.id = "popupbar--popup--form--name"
+      inputName.placeholder = "輸入姓名"
+      inputName.classList.add("popupbar--popup--form--input")
+      popUpForm.insertBefore(inputName, inputEmail)
+      submitBtn.value = "註冊新帳戶"
+      switchButton.innerText = "已經有帳戶了?點此登入"
+      popUpForm.id = "signup"
+    } else if (popUpForm.id === "signup"){
+      popUpTitle.innerText = "登入會員帳號"
+      let inputName = document.querySelector("#popupbar--popup--form--name")
+      popUpForm.removeChild(inputName)
+      submitBtn.value = "登入帳戶"
+      switchButton.innerText = "還沒有帳戶?點此註冊"
+      popUpForm.id = "signin"
+    }
+    
+    popUp.classList.toggle("showing")
+
+  }, 300)
+})
+
+// Submit registration form
+function signUpValidation(event){
+  event.preventDefault()
+  
+}
