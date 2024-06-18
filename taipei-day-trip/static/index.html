@@ -49,7 +49,7 @@
   <div class="popupbackground"></div>
   <div class="popupbar">
     <div class="popupbar--popup">
-      <form class="popupbar--popup--form" id="signin">
+      <form class="popupbar--popup--form" id="signin" onsubmit="signUpValidation(event)">
         <div class="popupbar--popup--form--title">登入會員帳號</div>
         <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input" placeholder="輸入電子信箱">
         <input type="password" name="inputPassword" id="popupbar--popup--form--password" class="popupbar--popup--form--input" placeholder="輸入密碼">
@@ -59,20 +59,5 @@
       <div class="popupbar--popup--closebtn"></div>
     </div>
   </div>
-  <!-- <div class="popupbar" id="sign--up">
-    <div class="popupbar--popup">
-      <form class="popupbar--popup--form">
-        <div class="popupbar--popup--form--title">註冊會員帳號</div>
-        <input type="text" name="inputName" id="popupbar--popup--form--name" class="popupbar--popup--form--input" placeholder="輸入姓名">
-        <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input"
-          placeholder="輸入電子信箱">
-        <input type="password" name="inputPassword" id="popupbar--popup--form--password"
-          class="popupbar--popup--form--input" placeholder="輸入密碼">
-        <input type="submit" value="註冊新帳戶" class="popupbar--popup--form--submit">
-        <div class="popupbar--popup--form--switch">已經有帳戶了?點此登入</div>
-      </form>
-      <div class="popupbar--popup--closebtn"></div>
-    </div>
-  </div> -->
 </body>
 </html>

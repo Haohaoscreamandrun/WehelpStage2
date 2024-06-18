@@ -137,21 +137,58 @@ class User(BaseModel):
 async def sign_up(request: Request, user: User):
     name, email, password = (s.strip() for s in (user.name, user.email, user.password))
     print("Strip info:", name, email, password)
+    # Backend validation
+
+    # Check if duplicated
+    try:
+        sql = 'SELECT email FROM member\
+                WHERE email = %s'
+        val = (email,)
+        myresult = await fetchJSON(sql, val, False)
+        for member in myresult:
+            print(member)
+            if member[0] is None:
+                response = {
+                    "ok": True
+                }
+                sql = 'INSERT INTO member\
+                        (name, email, password)\
+                        VALUES (%s, %s, %s)'
+                val = (name, email, password,)
+                fetchJSON(sql,val,False)
+                return JSONResponse(status_code=200, content=response)
+            elif member[0] is not None:
+                response = {
+                    "error": True,
+                    "message": "電子郵件已被註冊"
+                }
+                return JSONResponse(status_code = 400, content = response)
+    except Error as e:
+        response = {
+            "error": True,
+            "message": e
+        }
+        return JSONResponse(status_code = 500, content=response)
 
 # Global function
 
 async def fetchJSON(sql, val=None, dictionary=False):
     try:
         cnxconnection = cnxpool.get_connection()
-        if cnxconnection.is_connected():
-            mycursor = cnxconnection.cursor(dictionary=dictionary)
-            mycursor.execute(sql, val)
-            myresult = mycursor.fetchall()
-            for data in myresult:
-                # JSONresponse need a float type than decimal
+        mycursor = cnxconnection.cursor(dictionary=dictionary)
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchall()
+        print(myresult)
+        if (len(myresult) == 0):
+            cnxconnection.commit()
+            print(mycursor.rowcount, "record inserted.")
+        for data in myresult:
+            if (len(data) > 1):
+            # JSONresponse need a float type than decimal
                 data["lat"] = float(data["lat"])
                 data["lng"] = float(data["lng"])
                 data["images"] = data["images"].split(',')
+
     except Error as e:
         print("Error while connecting to MySQL using Connection pool ", e)
     finally:

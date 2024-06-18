@@ -95,4 +95,23 @@ if len(myresult) == 0:
 else:
 	print("Data is already inserted.")
 
+# CREATE member table
+## CHECK IF THE TABLE EXIST
+
+sql = 'CREATE TABLE member(\
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,\
+	name VARCHAR(30),\
+	email VARCHAR(50),\
+	password VARCHAR(20)\
+	)'
+
+try:
+	mycursor.execute(sql)
+	print("Table 'member' created successfully.")
+except mysql.connector.errors.ProgrammingError as e:
+	if e.errno == 1050:
+		print("Table 'member' already exists.")
+	else:
+		print("An error occurred when create table in MySQL.")
+
 mydb.close()

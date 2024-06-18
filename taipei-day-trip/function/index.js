@@ -213,7 +213,41 @@ switchButton.addEventListener('click', ()=>{
 })
 
 // Submit registration form
-function signUpValidation(event){
+async function signUpValidation(event){
   event.preventDefault()
+  let email = document.querySelector("#popupbar--popup--form--email").value
+  let password = document.querySelector("#popupbar--popup--form--password").value
+
+  // POST /api/user
+  if (event.target.id === "signup"){
+    let name = document.forms["signup"]["inputName"].value
   
+    // front end validation
+      
+    // construct json object
+    let request = {
+      "name": name,
+      "email": email,
+      "password": password
+    }
+    request = JSON.stringify(request)
+    // post to api
+    try{
+      let response = await fetch(server + "/api/user", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: request
+      })
+      if (!response.ok){
+        throw new Error("Network response is not ok")
+      }
+      response = await response.json()
+      console.log(response)
+    }catch(error){
+      console.error(error)
+    }
+
+  }
 }
