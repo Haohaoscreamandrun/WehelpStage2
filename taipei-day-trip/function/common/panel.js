@@ -4,8 +4,14 @@ import {signUpValidation, signInValidation} from "./member.js"
 export function openLoginPanel(){
   let background = document.querySelector(".popupbackground")
   let popUp = document.querySelector(".popupbar")
+  let popUpForm = document.querySelector(".popupbar--popup--form")
   background.style.display = 'block'
   popUp.classList.toggle("showing")
+  if (popUpForm.id === "signin"){
+    popUpForm.onsubmit = signInValidation
+  } else if (popUpForm.id === "signup"){
+    popUpForm.onsubmit = signUpValidation
+  } 
 }
 
 // close login panel function

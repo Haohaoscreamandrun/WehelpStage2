@@ -438,6 +438,8 @@ body
 {
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
 
   border-radius: 50%;
   border: #666666 2px solid;
@@ -470,19 +472,30 @@ body
   /* flex container */
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;  
   /* flex item */
   align-self: flex-end;
 
   margin-bottom: 10px;
+
+  overflow-x: scroll;
+    /* 出現滾動條 */
+  white-space: nowrap;
 }
+.bookingbar--imgcontainer--pagination::-webkit-scrollbar {
+  display: none;
+}
+/* 隱藏滾動條 */
 
 .bookingbar--imgcontainer--pagination--pages
 {
   /* size */
   width: 12px;
   height: 12px;
+  min-width: 12px;
+  min-height: 12px;
   
   /* margin */
   margin: 0 6px;

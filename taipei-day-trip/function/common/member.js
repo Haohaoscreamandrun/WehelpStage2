@@ -1,6 +1,4 @@
 import { server } from "./server.js"
-import {closeLoginPanel} from "./panel.js"
-import {tokenValidation} from "./token.js"
 
 // front end validation
   // Username Criteria: Only alphanumeric characters (a-z, A-Z, 0-9), with a length of 1 to 30 characters.
@@ -93,8 +91,8 @@ export async function signInValidation(event){
       for (let [key, value] of Object.entries(response)){
       localStorage.setItem(key, value)
       }
-      closeLoginPanel()
-      tokenValidation()
+      // Refresh page
+      location.reload()
     }    
         
   }catch(error){

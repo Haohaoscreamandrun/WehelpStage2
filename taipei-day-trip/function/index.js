@@ -1,5 +1,5 @@
-import {fetchScrollBar, fetchGrid, observer} from './common/fetch.js'
-import {submitForm, clickSearch, scrollClick} from './common/search.js'
+import {fetchScrollBar, fetchGrid, observer} from './index/fetch.js'
+import {submitForm, clickSearch, scrollClick} from './index/search.js'
 import {openLoginPanel,closeLoginPanel,switchSignInUpPanel} from './common/panel.js'
 import {tokenValidation} from './common/token.js'
 

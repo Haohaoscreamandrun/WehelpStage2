@@ -1,4 +1,4 @@
-import { server } from "./server.js"
+import { server } from "../common/server.js"
 
 export async function fetchScrollBar(){
   console.log("fetchScrollBar in use.")
