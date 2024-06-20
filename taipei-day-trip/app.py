@@ -255,22 +255,39 @@ class User(BaseModel):
                       pattern=pattern_name)
     email: EmailStr
 
+class ReturnUser(BaseModel):
+    data: User | None
 
-@app.get("/api/user/auth", response_model= User)
+
+@app.get("/api/user/auth", response_model=ReturnUser)
 async def user_validation(request: Request, Authorization: str = Header(None)):
-    user_data = jwt.decode(Authorization, JWTkey, algorithms="HS256")
+
+    try:
+        if Authorization is None:
+            response = {
+                "data": None
+            }
+        else:
+            user_data = jwt.decode(Authorization, JWTkey, algorithms="HS256")
+
+            response = {
+                "data": {
+                    "id": user_data['id'],
+                    "name": user_data['name'],
+                    "email": user_data['email']
+                }
+            }
     
-    response = {
-        "id": user_data['id'],
-        "name": user_data['name'],
-        "email": user_data['email']
-    }
-
-    return JSONResponse(
-        status_code=200,
-        content=response
-    )
-
+    # If token expired or decoded wrong
+    except (jwt.ExpiredSignatureError, jwt.DecodeError, Exception):
+        response = {
+            "data": None
+        }
+    finally:
+        return JSONResponse(
+            status_code=200,
+            content=response
+        )
 
 # Error handler
 
