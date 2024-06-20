@@ -154,35 +154,167 @@ scrollWindow.addEventListener("click",(event)=>{
     }
   })
 
-// Click to login
+// Click to open login panel
 let loginButton = document.querySelector("#navbar--navcontainer--login")
-loginButton.addEventListener('click',()=>{
+loginButton.addEventListener('click', openLoginPanel)
+
+// Click to close login panel
+let closeLoginButton = document.querySelector(".popupbar--popup--closebtn")
+closeLoginButton.addEventListener("click", closeLoginPanel)
+
+// Switching between Sign-in and sign-up
+let switchButton = document.querySelector(".popupbar--popup--form--switch")
+switchButton.addEventListener('click', switchSignInUpPanel)
+
+// Submit registration form
+async function signUpValidation(event){
+  event.preventDefault()
+  console.log("Submit to Sign UP!")
+  let email = document.querySelector("#popupbar--popup--form--email")
+  let password = document.querySelector("#popupbar--popup--form--password")
+  let name = document.forms["signup"]["inputName"]
+
+  // front end validation
+  // Username Criteria: Only alphanumeric characters (a-z, A-Z, 0-9), with a length of 1 to 30 characters.
+  let patternName = /^[a-zA-Z0-9]{3,30}$/ 
+ 
+  // Password Criteria: At least one uppercase letter (A-Z), one lowercase letter (a-z), one digit (0-9), and a total length of 1 to 20 characters.
+  let patternPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/
+
+  if(!patternName.test(name.value)){
+    name.value = ""
+    name.placeholder = "3-30字內英數字寫組成"
+    return;
+  }else if(!patternPassword.test(password.value)){
+    password.value = ""
+    password.placeholder = "8-20字內英數大小寫至少各一位"
+    return;
+  }
+  // construct json object
+  let request = {
+    "name": name.value,
+    "email": email.value,
+    "password": password.value
+  }
+  request = JSON.stringify(request)
+  // post to api
+  try{
+    let response = await fetch(server + "/api/user", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: request
+    })
+    response = await response.json()
+    let updateMessage = document.querySelector(".popupbar--popup--form--warning")
+    if (response.error) {
+      updateMessage.innerText = response.message
+    } else if (response["ok"]){
+      updateMessage.innerText = "註冊成功，請再次登入"
+    }
+
+  }catch(error){
+    console.error(error)
+  }
+
+  
+}
+
+// Submit signin form
+async function signInValidation(event){
+  event.preventDefault()
+  console.log("Submit to Sign IN!")
+  let email = document.querySelector("#popupbar--popup--form--email")
+  let password = document.querySelector("#popupbar--popup--form--password")
+
+  let patternPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/
+
+  if(!patternPassword.test(password.value)){
+    password.value = ""
+    password.placeholder = "8-20字內英數大小寫至少各一位"
+    return;
+  }
+  let request = {
+    "email": email.value,
+    "password": password.value
+  }
+  request = JSON.stringify(request)
+  try{
+    let response = await fetch(server + "/api/user/auth", {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: request
+    })
+    response = await response.json()
+    let updateMessage = document.querySelector(".popupbar--popup--form--warning")
+    if (response.error) {
+      // Cond1: Wrong credentials
+      console.log("Wrong credentials!")
+      updateMessage.innerText = response.message
+      let popUpForm = document.querySelector(".popupbar--popup--form")
+      popUpForm.reset()
+    } else {
+      // Cond2: Success, store token to localStorage
+      console.log("Login successful!")
+      for (let [key, value] of Object.entries(response)){
+      localStorage.setItem(key, value)
+      }
+      // closeLoginPanel()
+      tokenValidation()
+    }    
+        
+  }catch(error){
+    console.error(error)
+  }
+}
+
+// token validation function
+async function tokenValidation(){
+  let token = localStorage.getItem('token')
+  let response = await fetch(
+    server + "/api/user/auth", 
+    {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    }
+  )
+  response = await response.json()
+  console.log(response)
+}
+
+
+// open login panel function
+function openLoginPanel(){
   let background = document.querySelector(".popupbackground")
   let popUp = document.querySelector(".popupbar")
   background.style.display = 'block'
   popUp.classList.toggle("showing")
-})
+}
 
-// Click to close login panel
-let closeLoginButton = document.querySelector(".popupbar--popup--closebtn")
-closeLoginButton.addEventListener("click",()=>{
+// close login panel function
+function closeLoginPanel(){
   let background = document.querySelector(".popupbackground")
   let popUp = document.querySelector(".popupbar")
   background.style.display = 'none'
   popUp.classList.toggle("showing")
-  let popUpForm = document.querySelector(".popupbar--popup--form")
-  popUpForm.reset()
   let updateMessage = document.querySelector(".popupbar--popup--form--warning")
   updateMessage.innerText = ""
-})
+}
 
-// Switching between Sign-in and sign-up
-let switchButton = document.querySelector(".popupbar--popup--form--switch")
-switchButton.addEventListener('click', ()=>{
-  
+// switch signin/signup panel function
+function switchSignInUpPanel(){
   let popUp = document.querySelector(".popupbar")
   popUp.classList.toggle("showing")
-  
+  let warningMessage = document.querySelector(".popupbar--popup--form--warning")
+    if (warningMessage.innerText !== ""){
+      warningMessage.innerText = ""
+    }
   setTimeout(() => {
 
     let popUpForm = document.querySelector(".popupbar--popup--form")
@@ -202,6 +334,7 @@ switchButton.addEventListener('click', ()=>{
       submitBtn.value = "註冊新帳戶"
       switchButton.innerText = "已經有帳戶了?點此登入"
       popUpForm.id = "signup"
+      popUpForm.onsubmit = signUpValidation
     } else if (popUpForm.id === "signup"){
       popUpTitle.innerText = "登入會員帳號"
       let inputName = document.querySelector("#popupbar--popup--form--name")
@@ -209,52 +342,10 @@ switchButton.addEventListener('click', ()=>{
       submitBtn.value = "登入帳戶"
       switchButton.innerText = "還沒有帳戶?點此註冊"
       popUpForm.id = "signin"
-    }
-    
+      popUpForm.onsubmit = signInValidation
+    } 
+    popUpForm.reset()
     popUp.classList.toggle("showing")
 
   }, 300)
-})
-
-// Submit registration form
-async function signUpValidation(event){
-  event.preventDefault()
-  let email = document.querySelector("#popupbar--popup--form--email").value
-  let password = document.querySelector("#popupbar--popup--form--password").value
-
-  // POST /api/user
-  if (event.target.id === "signup"){
-    let name = document.forms["signup"]["inputName"].value
-  
-    // front end validation
-      
-    // construct json object
-    let request = {
-      "name": name,
-      "email": email,
-      "password": password
-    }
-    request = JSON.stringify(request)
-    // post to api
-    try{
-      let response = await fetch(server + "/api/user", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: request
-      })
-      response = await response.json()
-      let updateMessage = document.querySelector(".popupbar--popup--form--warning")
-      if (response.error) {
-        updateMessage.innerText = response.message
-      } else if (response["ok"]){
-        updateMessage.innerText = "註冊成功"
-      }
-
-    }catch(error){
-      console.error(error)
-    }
-
-  }
 }
