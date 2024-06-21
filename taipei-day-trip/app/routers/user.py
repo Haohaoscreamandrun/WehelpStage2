@@ -137,7 +137,7 @@ async def sign_in(request: Request, user: UserSignInInput):
             }
             # Encode info
             encoded_response = jwt.encode(
-                response, str(JWTkey), algorithm="HS256")
+                response, JWTkey, algorithm="HS256")
             # Construct response
             response = {
                 "token": encoded_response
@@ -157,7 +157,7 @@ async def user_validation(request: Request, Authorization: str = Header(None)):
                 "data": None
             }
         else:
-            user_data = jwt.decode(Authorization, str(JWTkey), algorithms="HS256")
+            user_data = jwt.decode(Authorization, JWTkey, algorithms="HS256")
 
             response = {
                 "data": {
