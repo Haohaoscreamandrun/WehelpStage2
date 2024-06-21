@@ -157,7 +157,7 @@ async def user_validation(request: Request, Authorization: str = Header(None)):
                 "data": None
             }
         else:
-            user_data = jwt.decode(Authorization, JWTkey, algorithms="HS256")
+            user_data = jwt.decode(Authorization, str(JWTkey), algorithms="HS256")
 
             response = {
                 "data": {

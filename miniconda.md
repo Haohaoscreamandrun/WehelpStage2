@@ -66,4 +66,5 @@ taipeiAttractions        /home/ubuntu/miniconda3/envs/taipeiAttractions
 (taipeiAttractions) ubuntu@ip-172-31-23-171:~$ pip install python-dotenv
 (taipeiAttractions) ubuntu@ip-172-31-23-171:~$ pip install fastapi
 (taipeiAttractions) ubuntu@ip-172-31-23-171:~$ pip install uvicorn
+(taipeiAttractions) ubuntu@ip-172-31-23-171:~$ pip install pyjwt
 ```
