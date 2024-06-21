@@ -48,7 +48,7 @@ import json
 
 # open json file
 
-path = "./taipei-day-trip/data/taipei-attractions.json"
+path = "../taipei-day-trip/data/taipei-attractions.json"
 
 with open(path, encoding="utf-8") as file:
 	attractions_objects = json.load(file)
