@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from .function import *
+from app.function.function import *
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 

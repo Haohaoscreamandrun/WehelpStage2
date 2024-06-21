@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, Field, field_validator
 import re
 import datetime
 import jwt
-from .function import *
+from app.function.function import *
 from dotenv import load_dotenv
 import os
 import sys
@@ -157,6 +157,7 @@ async def user_validation(request: Request, Authorization: str = Header(None)):
                 "data": None
             }
         else:
+            Authorization = Authorization.split(" ")[1]
             user_data = jwt.decode(Authorization, JWTkey, algorithms="HS256")
 
             response = {

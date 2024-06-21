@@ -15,7 +15,7 @@ export async function tokenValidation(){
     console.log("token is: ", token)
     headerContent = {
       'Content-Type': 'application/json',
-      'Authorization': token
+      'Authorization': `Bearer ${token}`
     }
   }
   let loginButton = document.querySelector("#navbar--navcontainer--login")
