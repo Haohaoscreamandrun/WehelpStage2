@@ -48,7 +48,7 @@ import json
 
 # open json file
 
-path = "./taipei-day-trip/data/taipei-attractions.json"
+path = "../taipei-day-trip/data/taipei-attractions.json"
 
 with open(path, encoding="utf-8") as file:
 	attractions_objects = json.load(file)
@@ -94,5 +94,24 @@ if len(myresult) == 0:
 			print(e)
 else:
 	print("Data is already inserted.")
+
+# CREATE member table
+## CHECK IF THE TABLE EXIST
+
+sql = 'CREATE TABLE member(\
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,\
+	name VARCHAR(30),\
+	email VARCHAR(50),\
+	password VARCHAR(20)\
+	)'
+
+try:
+	mycursor.execute(sql)
+	print("Table 'member' created successfully.")
+except mysql.connector.errors.ProgrammingError as e:
+	if e.errno == 1050:
+		print("Table 'member' already exists.")
+	else:
+		print("An error occurred when create table in MySQL.")
 
 mydb.close()

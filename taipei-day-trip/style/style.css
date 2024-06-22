@@ -438,6 +438,8 @@ body
 {
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
 
   border-radius: 50%;
   border: #666666 2px solid;
@@ -470,19 +472,30 @@ body
   /* flex container */
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;  
   /* flex item */
   align-self: flex-end;
 
   margin-bottom: 10px;
+
+  overflow-x: scroll;
+    /* 出現滾動條 */
+  white-space: nowrap;
 }
+.bookingbar--imgcontainer--pagination::-webkit-scrollbar {
+  display: none;
+}
+/* 隱藏滾動條 */
 
 .bookingbar--imgcontainer--pagination--pages
 {
   /* size */
   width: 12px;
   height: 12px;
+  min-width: 12px;
+  min-height: 12px;
   
   /* margin */
   margin: 0 6px;
@@ -722,21 +735,33 @@ input[type='radio']:checked
 .popupbar
 {
   /* display */
-  display: none;
+  visibility: hidden;
 
   /* size */
   width: 340px;
-  height: 275px;
+  /* height: 275px; */
   
   /* position */
   position: fixed;
-  left: calc(50% - 175px);
-  top: 80px;
+  left: calc(50% - 170px);
+  top: 60px;
   z-index: 201;
+  opacity: 0;
   
   /* background */
   background:linear-gradient(270deg, #337788 0%, #66AABB 100%);
   border-radius: 6px 6px 0 0;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.showing
+{
+  /* display */
+  visibility: visible;
+  
+  top: 80px;
+  opacity: 1; 
 }
 
 .popupbar--popup--form
@@ -744,7 +769,7 @@ input[type='radio']:checked
   /* size */
   box-sizing: border-box;
   width: 100%;
-  height: 265px;
+  /* height: 265px; */
   margin-top: 10px;
   padding: 15px;
 
@@ -763,6 +788,8 @@ input[type='radio']:checked
   /* font */
   font-weight: 700;
   font-size: 24px;
+
+  margin-bottom: 15px;
 }
 
 .popupbar--popup--form--input
@@ -770,6 +797,7 @@ input[type='radio']:checked
   box-sizing: border-box;
   width: 100%;
   padding: 15px;
+  margin-bottom: 10px;
 
   border: 1px #757575 solid;
   border-radius: 5px;
@@ -783,6 +811,7 @@ input[type='radio']:checked
 {
   width: 100%;
   padding: 10px 0;
+  margin-bottom: 10px;
   border: none;
   border-radius: 5px;
   background-color: #448899;
@@ -791,6 +820,12 @@ input[type='radio']:checked
   font-size: 16px;
   color: #FFF;
 }
+
+.popupbar--popup--form--submit:hover
+{
+  cursor: pointer;
+}
+
 .popupbar--popup--form--switch
 {
   /* font */
@@ -799,10 +834,37 @@ input[type='radio']:checked
   color: #666;
 }
 
+.popupbar--popup--form--warning
+{
+  /* font */
+  font-weight: 500;
+  font-size: 16px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.popupbar--popup--form--switch
+{
+  cursor: pointer;
+}
+
+
 .popupbar--popup--closebtn
 {
+  background-repeat: no-repeat;
+  background-position: center center;
   background-image: url("/source/icon_close.png");
-  position: relative;
+  background-size: 16px;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}
+
+.popupbar--popup--closebtn:hover
+{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1170px){
