@@ -668,6 +668,11 @@ input[type='radio']:checked
   /* text-overflow: nowrap; */
 }
 
+.bookingbar--bookingpanel--bookingform--submit:hover
+{
+  cursor: pointer;
+}
+
 .seperation
 {
   border: 1px solid #E8E8E8;
@@ -912,6 +917,7 @@ input[type='radio']:checked
 {
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: cover;
   width: 250px;
   height: 200px;
 }
@@ -947,6 +953,11 @@ input[type='radio']:checked
   background-position: center center;
   width: 30px;
   height: 30px;
+}
+
+.reservebar--bookinginfo--details--titlerow--delete:hover
+{
+  cursor: pointer;
 }
 
 .reservebar--bookinginfo--details--contentrow

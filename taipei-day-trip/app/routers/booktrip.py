@@ -69,7 +69,9 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
             WHERE user_id = %s'
         val = (user['id'],)
         get_booking = await check_booking(sql, val)
-        if (get_booking != None):
+        
+        if len(get_booking) > 0:
+            
             content = BookingAttraction(
                 id=get_booking[0][0],
                 name=get_booking[0][1],
@@ -86,10 +88,12 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
                 data=content
             )
         else:
+            
             content = GetBookingSuccess(
                 data= None
             )
         content = content.model_dump_json()
+        
         return JSONResponse(
             status_code= status.HTTP_200_OK,
             content=content
