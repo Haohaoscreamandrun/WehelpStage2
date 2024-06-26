@@ -1,4 +1,6 @@
 import {signUpValidation, signInValidation} from "./member.js"
+import { tokenValidation } from "./token.js"
+import { server } from "./server.js"
 
 // open login panel function
 export function openLoginPanel(){
@@ -66,4 +68,14 @@ export function switchSignInUpPanel(){
     popUp.classList.toggle("showing")
 
   }, 300)
+}
+
+export async function openBookingPanel(){
+  let signStatus = await tokenValidation()
+  
+  if (signStatus['data'] === null){
+    openLoginPanel()
+  } else {
+    window.location.href = `${server}/booking`
+  }
 }

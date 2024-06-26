@@ -867,6 +867,232 @@ input[type='radio']:checked
   cursor: pointer;
 }
 
+.reservebar
+{
+  box-sizing: border-box;
+
+  padding:50px 10px 40px;
+  max-width: 1000px;
+  width: 100%;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reservebar--greeting
+{
+  box-sizing: border-box;
+  text-align: left;
+  width: 100%;
+
+  padding-bottom: 30px;
+
+  /* font */
+  font-weight: 700;
+  font-size: 19px;
+  color: #666666;
+}
+
+.reservebar--bookinginfo
+{
+  box-sizing: border-box;
+  padding: 0 10px;
+  width: 100%;
+
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.reservebar--bookinginfo--img
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 250px;
+  height: 200px;
+}
+
+.reservebar--bookinginfo--details
+{
+  padding-left: 30px;
+  flex: 1;
+}
+
+.reservebar--bookinginfo--details--titlerow
+{
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+}
+
+.reservebar--bookinginfo--details--titlerow--title
+{
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+  color: #448899;
+}
+
+.reservebar--bookinginfo--details--titlerow--delete
+{
+  background-image: url('../source/icon_delete.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 30px;
+  height: 30px;
+}
+
+.reservebar--bookinginfo--details--contentrow
+{
+  padding-bottom: 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+}
+
+.reservebar--bookinginfo--details--contentrow--contenttitle
+{
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+  color: #666;
+}
+
+.reservebar--bookinginfo--details--contentrow--conttent
+{
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+}
+
+.credentialbar
+{
+  box-sizing: border-box;
+  padding: 40px 10px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.credentialbar--form
+{
+  box-sizing: border-box;
+  padding: 0 10px;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.credentialbar--form--title
+{
+  box-sizing: border-box;
+  flex: 1;
+  padding-bottom: 5px;
+  /* font */
+  font-weight: 700;
+  font-size: 19px;
+  color: #666;
+}
+
+.credentialbar--form--content
+{
+  box-sizing: border-box;
+  flex: 1;
+  padding-top: 15px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.credentialbar--form--content--label
+{
+  /* font */
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+}
+
+.credentialbar--form--content--input
+{
+  box-sizing: border-box;
+
+  flex: 1;
+  max-width: 200px;
+  height: 38px;
+
+  border: 1px #E8E8E8 solid;
+  border-radius: 5px;
+
+  padding: 10px;
+}
+
+.credentialbar--form--reminder
+{
+  padding-top: 15px;
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+  color: #666;
+}
+
+.submitbar
+{
+  box-sizing: border-box;
+  padding: 40px 10px;
+  max-width: 1000px;
+  width: 100%;
+  
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
+}
+
+.submitbar--totalprice
+{
+  margin-right: 10px;
+  /* font */
+  font-weight: 700;
+  font-size: 16px;
+  color: #666;
+}
+
+.submitbar--submit
+{
+  box-sizing: border-box;
+  /* font */
+  font-weight: 400;
+  font-size: 19px;
+  color: #FFF;
+  text-align: center;
+
+  margin: 20px 10px 0 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #448899;
+}
+
 @media screen and (max-width: 1170px){
   .gridbar
   {
@@ -918,5 +1144,49 @@ input[type='radio']:checked
   .first
   {
     display: none;
+  }
+
+  .reservebar
+  {
+    padding: 0 ;
+  }
+
+  .reservebar--greeting
+  {
+    padding: 40px 10px;
+  }
+
+  .reservebar--bookinginfo
+  {
+    flex-direction: column;
+    
+    padding: 0 10px;
+  }
+
+  .reservebar--bookinginfo--img
+  {
+    width:100%;
+  }
+
+  .reservebar--bookinginfo--details
+  {
+    flex: 1;
+    padding: 30px 0;
+    margin-bottom: 30px;
+    height: 200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .reservebar--bookinginfo--details--titlerow
+  {
+    width: 100%;
+  }
+
+  .reservebar--bookinginfo--details--titlerow--delete
+  {
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 }

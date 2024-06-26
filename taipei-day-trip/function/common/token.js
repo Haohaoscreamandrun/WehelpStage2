@@ -12,7 +12,7 @@ export async function tokenValidation(){
       'Content-Type': 'application/json'
     }
   } else {
-    console.log("token is: ", token)
+    
     headerContent = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -38,4 +38,6 @@ export async function tokenValidation(){
     loginButton.removeEventListener("click", openLoginPanel)
     loginButton.addEventListener("click", signOut)
   }
+
+  return response
 }

@@ -40,11 +40,10 @@ export async function signUpValidation(event){
       },
       body: request
     })
-    response = await response.json()
     let updateMessage = document.querySelector(".popupbar--popup--form--warning")
     if (response.error) {
       updateMessage.innerText = response.message
-    } else if (response["ok"]){
+    } else if (response.ok){
       updateMessage.innerText = "註冊成功，請再次登入"
     }
   }catch(error){

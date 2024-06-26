@@ -1,9 +1,8 @@
+import { server } from "../common/server.js"
 // fetch for attraction detail
 export async function fetchAttraction(attractionID){
   // fetch
-  let url = window.location.href
-  let urlParts = url.split('/')
-  let attractionURL = `${urlParts.slice(0,3).join("/")}/api/attraction/${attractionID}`
+  let attractionURL = `${server}/api/attraction/${attractionID}`
   
   let response = await fetch(attractionURL)
   if (!response.ok) {
