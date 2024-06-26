@@ -48,9 +48,12 @@ import json
 
 # open json file
 
-path = "./taipei-day-trip/data/taipei-attractions.json"
+# path = os.path.join('.', 'taipei-day-trip','data', 'taipei-attractions.json')
+current_dir = os.path.dirname(__file__)
+new_path = os.path.join(current_dir, '..', 'data', 'taipei-attractions.json')
+print(new_path)
 
-with open(path, encoding="utf-8") as file:
+with open(new_path, encoding="utf-8") as file:
 	attractions_objects = json.load(file)
 
 attractions_objects_list = attractions_objects["result"]["results"]
