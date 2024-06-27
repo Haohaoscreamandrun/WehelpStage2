@@ -141,7 +141,6 @@ async def sign_in(request: Request, user: UserSignInInput):
                 # Encode info
                 encoded_response = jwt.encode(
                     response, JWTkey, algorithm="HS256")
-                print(encoded_response)
                 # Construct response
                 response = {
                     "token": encoded_response

@@ -60,10 +60,10 @@ async def thankyou(request: Request):
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=400,
-        content=jsonable_encoder({
+        content={
             "error": True,
             "message": str(f"{exc.errors()[0]['loc'][1]}:{exc.errors()[0]['msg']}")
-        })
+        }
     )
 
 
@@ -71,8 +71,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 async def http_exception_handler(request, exc):
     return JSONResponse(
         status_code=exc.status_code,
-        content=jsonable_encoder({
+        content={
             "error": True,
             "message": str(exc.detail)
-        })
+        }
     )

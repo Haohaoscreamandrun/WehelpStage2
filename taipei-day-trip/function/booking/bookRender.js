@@ -5,7 +5,7 @@ export function renderBooking(user,response){
       let reserveBar = document.querySelector(".reservebar--bookinginfo")
       let credentialBars = document.querySelectorAll(".credentialbar")
       let submitBar = document.querySelector(".submitbar")
-      let seperationBars = document.querySelectorAll(".second")
+      let seperationBars = document.querySelectorAll(".shrink--onphone")
       reserveBar.innerHTML = `<div class="reservebar--bookinginfo--details--contentrow--conttent">目前沒有任何待預訂的行程</div>`
       credentialBars.forEach(credentialBar => {
         credentialBar.style.display = 'none'

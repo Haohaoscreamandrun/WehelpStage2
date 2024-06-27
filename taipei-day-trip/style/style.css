@@ -680,7 +680,7 @@ input[type='radio']:checked
   max-width: 1200px;
 }
 
-.first
+.fullwidth
 {
   max-width: none;
 }
@@ -1113,7 +1113,7 @@ input[type='radio']:checked
   {
     width: 50vw;
   }
-  .second 
+  .shrink--onphone 
   {
     width: 95%;
   }
@@ -1152,7 +1152,7 @@ input[type='radio']:checked
   {
     height: 300px;
   }
-  .first
+  .hide--onphone
   {
     display: none;
   }

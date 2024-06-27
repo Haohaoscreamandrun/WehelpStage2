@@ -72,32 +72,33 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
         
         if len(get_booking) > 0:
             
-            content = BookingAttraction(
-                id=get_booking[0][0],
-                name=get_booking[0][1],
-                address=get_booking[0][2],
-                image=get_booking[0][3].split(",")[0]
-            )
-            content = Booking(
-                attraction=content,
-                date=get_booking[0][5],
-                time=get_booking[0][6],
-                price=get_booking[0][7]
-            )
-            content = GetBookingSuccess(
-                data=content
-            )
+            data = {
+                'attraction': {
+                    'id': get_booking[0][0],
+                    'name': get_booking[0][1],
+                    'address': get_booking[0][2],
+                    'image': get_booking[0][3].split(",")[0]
+                },
+                'date': str(get_booking[0][5]),
+                'time': get_booking[0][6],
+                'price': get_booking[0][7]
+            }
+
+            content = {
+                'data': data
+            }
+
         else:
             
-            content = GetBookingSuccess(
-                data= None
-            )
-        content = content.model_dump_json()
+            content = {
+                'data': None
+            }
         
         return JSONResponse(
             status_code= status.HTTP_200_OK,
             content=content
         )
+    
     except HTTPException as e:
         response = Error(
             error=True,
@@ -105,7 +106,7 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
         )
         return JSONResponse(
             status_code=e.status_code,
-            content=response.model_dump_json()
+            content=dict(response)
         )
 
 
@@ -128,7 +129,7 @@ async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(
         )
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
-            content=response.model_dump_json()
+            content=dict(response)
         )
     try:
         user_id = user['id']
@@ -153,7 +154,7 @@ async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump_json()
+            content=dict(response)
         )
     except HTTPException as e:
         response = Error(
@@ -162,7 +163,7 @@ async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(
         )
         return JSONResponse(
             status_code=e.status_code,
-            content=response.model_dump_json()
+            content=dict(response)
         )
 
 
@@ -180,7 +181,7 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
         )
         return JSONResponse(
             status_code=status.HTTP_200_OK,
-            content=response.model_dump_json()
+            content=dict(response)
         )
     except HTTPException as e:
         response = Error(
@@ -189,6 +190,6 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
         )
         return JSONResponse(
             status_code=e.status_code,
-            content=response.model_dump_json()
+            content=dict(response)
         )
 

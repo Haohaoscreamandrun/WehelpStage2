@@ -29,7 +29,6 @@ async function flow(){
       })
     })
     let response = await respond.json()
-    response = JSON.parse(response)
 
     renderBooking(user, response)
     

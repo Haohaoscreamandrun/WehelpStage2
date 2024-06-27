@@ -13,7 +13,7 @@ export async function deleteBooking(){
       })
     })
     let response = await respond.json()
-    response = JSON.parse(response)
+    
     if (response.error) {
       throw new Error(`HTTP error! Status: ${response.message}`)
     } else if (response.ok){
