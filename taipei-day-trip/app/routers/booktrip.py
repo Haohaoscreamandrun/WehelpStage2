@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, AnyUrl
 from datetime import date
-from typing import Literal
 from typing import Annotated
 from datetime import *
 from starlette import status
-from app.function.function import user_validation, commitDB, check_booking
+from app.function.function import *
+from app.function.basemodel import *
 
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
@@ -14,39 +13,16 @@ sys.stdout.reconfigure(encoding='utf-8')
 router = APIRouter(
     prefix="/api/booking",
     tags=["booking"],
-    dependencies=[Depends(user_validation)]
+    dependencies=[Depends(user_validation)],
+    responses={
+        403: {'model': Error, 'description': "未登入系統，拒絕存取"},
+        422: {'model':Error,
+             'description': "輸入格式錯誤"
+             },
+        500: {'model': Error, 'description': '伺服器內部錯誤'}
+    }
 )
 
-
-class BookingInput(BaseModel):
-    attractionId: int
-    date: date
-    time: Literal['Morning', 'Afternoon']
-    price: Literal[2000, 2500]
-
-
-class Success(BaseModel):
-    ok: bool
-
-
-class Error(BaseModel):
-    error: bool
-    message: str
-
-class BookingAttraction(BaseModel):
-    id: int
-    name: str
-    address: str
-    image: AnyUrl
-
-class Booking(BaseModel):
-    attraction: BookingAttraction
-    date: date
-    time: Literal['Morning', 'Afternoon']
-    price: Literal[2000, 2500]
-
-class GetBookingSuccess(BaseModel):
-    data: Booking | None
 
 @router.get("", responses={
     200: {'model': GetBookingSuccess, 'description': "建立成功"},
@@ -112,9 +88,7 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
 
 @router.post("", responses={
     200: {'model': Success, 'description': "建立成功"},
-    400: {'model': Error, 'description': '建立失敗，輸入不正確或其他原因'},
-    403: {'model': Error, 'description': "未登入系統，拒絕存取"},
-    500: {'model': Error, 'description': '伺服器內部錯誤'}
+    400: {'model': Error, 'description': '建立失敗，輸入不正確或其他原因'}
     },response_class=JSONResponse, summary="建立新的預定行程")
 async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(user_validation)]):
     
@@ -168,8 +142,7 @@ async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(
 
 
 @router.delete("",responses={
-    200: {'model': Success, 'description': "建立成功"},
-    403: {'model': Error, 'description': "未登入系統，拒絕存取"}
+    200: {'model': Success, 'description': "建立成功"}
     }, response_class=JSONResponse, summary="刪除目前的預定行程")
 async def getBookings(user: Annotated[dict, Depends(user_validation)]):
     try:
