@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/style/style.css">
 </head>
 <script defer type="module" src="/function/booking.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>
 <body>
   <div class="navbar">
     <div class="navbar--title">台北一日遊</div>
@@ -69,34 +70,36 @@
       <div class="credentialbar--form--reminder">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
     </form>
   </div>
-  <div class="seperation shrink--onphone"></div>
   <div class="credentialbar">
-    <form action="" class="credentialbar--form" id="paymentbar">
+    <form class="credentialbar--form" id="paymentbar">
       <div class="credentialbar--form--title">信用卡付款資訊</div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--cardnumberinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--cardnumber">卡片號碼：</label>
-        <input type="password" class="credentialbar--form--content--input" id="credentialbar--form--content--cardnumberinput">
+      <div class="credentialbar--form--content" >
+        <div class="credentialbar--form--content--label"
+          id="credentialbar--form--content--cardnumber">卡片號碼：</div>
+        <div class="credentialbar--form--content--input" id="card-number"></div>
       </div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--cardexpireinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--cardexpire">過期時間：</label>
-        <input type="text" class="credentialbar--form--content--input" id="credentialbar--form--content--cardexpireinput"
-          placeholder="MM/YY">
+      <div class="credentialbar--form--content" >
+        <div class="credentialbar--form--content--label"
+          id="credentialbar--form--content--cardexpire">過期時間：</div>
+        <div class="credentialbar--form--content--input" id="card-expiration-date"></div>
       </div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--card3digitsinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--card3digits">驗證密碼：</label>
-        <input type="text" class="credentialbar--form--content--input" id="credentialbar--form--content--card3digitsinput"
-          placeholder="CVV">
+      <div class="credentialbar--form--content last--child">
+        <div class="credentialbar--form--content--label"
+          id="credentialbar--form--content--card3digits">驗證密碼：</div>
+        <div class="credentialbar--form--content--input" id="card-ccv"></div>
+      </div>
+      <div class="seperation shrink--onphone"></div>
+      <div class="submitbar">
+        <div class="submitbar--totalprice">總價：新台幣 2000 元</div>
+        <button type="submit" class="submitbar--submit" disabled>確認訂購並付款</button>
       </div>
     </form>
   </div>
-  <div class="seperation shrink--onphone"></div>
+  <!-- <div class="seperation shrink--onphone"></div>
   <div class="submitbar">
     <div class="submitbar--totalprice">總價：新台幣 2000 元</div>
-    <button class="submitbar--submit">確認訂購並付款</button>
-  </div>
+    <button type="submit" class="submitbar--submit">確認訂購並付款</button>
+  </div> -->
   <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
   <div class="popupbackground"></div>
   <div class="popupbar">

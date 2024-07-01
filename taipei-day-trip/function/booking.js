@@ -2,6 +2,7 @@ import { server } from "./common/server.js";
 import { tokenValidation } from "./common/token.js";
 import { renderBooking } from "./booking/bookRender.js";
 import { navbarButtons } from "./common/nav_button.js";
+import { config, onUpdate, onSubmit } from "./booking/tappay.js";
 
 async function flow(){
 
@@ -36,6 +37,10 @@ async function flow(){
     console.error('Error fetching data:', error);
   }
 
-  
+  // tappay
+  TPDirect.setupSDK(151734, 'app_9veB5VWRTfHKqTuloC4j32wfD9ERzCDGzl8JfEs6mChxraKzPdx8chncoUVK', 'sandbox')
+  TPDirect.card.setup(config)
+  TPDirect.card.onUpdate(onUpdate)
+  $('form').on('submit', onSubmit)
 }
 flow()

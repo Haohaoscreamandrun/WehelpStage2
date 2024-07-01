@@ -1079,6 +1079,11 @@ input[type='radio']:checked
   align-items: end;
 }
 
+.last--child
+{
+  padding-bottom: 40px;
+}
+
 .submitbar--totalprice
 {
   margin-right: 10px;
@@ -1102,6 +1107,22 @@ input[type='radio']:checked
   border: none;
   border-radius: 5px;
   background-color: #448899;
+}
+
+.submitbar--submit:hover
+{
+  cursor: pointer;
+}
+
+.submitbar--submit:disabled
+{
+  color: #484747;
+  background-color: #bdc8ca;
+}
+
+.submitbar--submit:disabled:hover
+{
+  cursor: default;
 }
 
 @media screen and (max-width: 1170px){
