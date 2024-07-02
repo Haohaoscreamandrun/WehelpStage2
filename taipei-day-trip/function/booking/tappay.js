@@ -1,3 +1,8 @@
+import { server } from "../common/server.js"
+
+
+let prime = ""
+
 export let config = {
     
     fields: {
@@ -54,17 +59,27 @@ export let config = {
             }
         }
     },
-    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號 (未正確於每個裝置上顯示)
     isMaskCreditCardNumber: true,
     maskCreditCardNumberRange: {
-        beginIndex: 6,
-        endIndex: 11
+        beginIndex: 5,
+        endIndex: 12
     }
 }
 
 export function onUpdate(update) {
     // update.canGetPrime === true
     // --> you can call TPDirect.card.getPrime()
+    // console.log(
+    //     `
+    //     cardType (String): ${update.cardType}
+    //     canGetPrime (boolean): ${update.canGetPrime}
+    //     hasError (boolean): ${update.hasError}
+    //     status.number (int): ${update.status.number}
+    //     status.expiry (int): ${update.status.expiry}
+    //     status.ccv (int): ${update.status.ccv}
+    //     `
+    // )
     let submitButton = document.querySelector('.submitbar--submit')
     
     if (update.canGetPrime) {
@@ -82,33 +97,32 @@ export function onUpdate(update) {
 
     // number 欄位是錯誤的
     if (update.status.number === 2) {
-        setNumberFormGroupToError()
+        // setNumberFormGroupToError()
     } else if (update.status.number === 0) {
-        setNumberFormGroupToSuccess()
+        // setNumberFormGroupToSuccess()
     } else {
-        setNumberFormGroupToNormal()
+        // setNumberFormGroupToNormal()
     }
     
     if (update.status.expiry === 2) {
-        setNumberFormGroupToError()
+        // setNumberFormGroupToError()
     } else if (update.status.expiry === 0) {
-        setNumberFormGroupToSuccess()
+        // setNumberFormGroupToSuccess()
     } else {
-        setNumberFormGroupToNormal()
+        // setNumberFormGroupToNormal()
     }
     
     if (update.status.ccv === 2) {
-        setNumberFormGroupToError()
+        // setNumberFormGroupToError()
     } else if (update.status.ccv === 0) {
-        setNumberFormGroupToSuccess()
+        // setNumberFormGroupToSuccess()
     } else {
-        setNumberFormGroupToNormal()
+        // setNumberFormGroupToNormal()
     }
 }
 
-export function onSubmit(event) {
-    event.preventDefault()
-
+export function onSubmit(response) {
+    
     // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus()
 
@@ -124,9 +138,48 @@ export function onSubmit(event) {
             alert('get prime error ' + result.msg)
             return
         }
-        alert('get prime 成功，prime: ' + result.card.prime)
-
+        // alert('get prime 成功，prime: ' + result.card.prime)
+        prime = result.card.prime
         // send prime to your server, to pay with Pay by Prime API .
         // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+        fetchPostOrder(response)
     })
+}
+
+async function fetchPostOrder(response){
+    let nameInput = document.querySelector("#credentialbar--form--content--nameinput")
+    let emailInput = document.querySelector("#credentialbar--form--content--mailinput")
+    let phoneInput = document.getElementById('credentialbar--form--content--phoneinput')
+    
+
+    let requestBody = {
+        'prime': prime,
+        'order': {
+            'price': response.data.price,
+            'trip': {
+                'attraction': response.data.attraction,
+                'date': response.data.date,
+                'time': response.data.time
+            },
+            'contact': {
+                'name': nameInput.value,
+                'email': emailInput.value,
+                'phone': phoneInput.value
+            }
+        }
+    }
+    // console.log(requestBody)
+    let token = localStorage.getItem('token')
+    let respond = await fetch(`${server}/api/orders`,
+        {
+            method: 'POST',
+            headers: new Headers({
+                "Content-Type": 'application/json',
+                'Authorization': `Bearer ${token}`
+            }),
+            body: JSON.stringify(requestBody)
+        }
+    ) 
+    let responseObj = await respond.json()
+    console.log(responseObj)
 }

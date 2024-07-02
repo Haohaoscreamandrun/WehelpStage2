@@ -1,4 +1,5 @@
 from pydantic import BaseModel, AnyUrl, EmailStr, Field, field_validator
+from pydantic_extra_types.phone_numbers import PhoneNumber
 from datetime import date
 from typing import Literal
 import re
@@ -79,3 +80,35 @@ class Booking(BaseModel):
 
 class GetBookingSuccess(BaseModel):
     data: Booking | None
+
+
+class Trip(BaseModel):
+    attraction: BookingAttraction
+    date: date
+    time: Literal['Morning', 'Afternoon']
+
+
+class Contact(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str
+
+class OrderInput(BaseModel):
+    price: Literal[2000, 2500]
+    trip: Trip
+    contact: Contact
+
+class PostOrder(BaseModel):
+    prime: str
+    order: OrderInput
+
+class PaymentStatus(BaseModel):
+    status: int
+    message: str
+
+class OrderResult(BaseModel):
+    number: str
+    payment: PaymentStatus
+
+class PostOrderSuccess(BaseModel):
+    data: OrderResult
