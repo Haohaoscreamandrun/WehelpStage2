@@ -140,6 +140,7 @@ except mysql.connector.errors.ProgrammingError as e:
 sql = 'CREATE TABLE orders(\
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,\
 	booking_id BIGINT,\
+	order_number VARCHAR(50),\
 	contact_name VARCHAR(30),\
 	contact_email VARCHAR(50),\
 	contact_phone VARCHAR(15),\

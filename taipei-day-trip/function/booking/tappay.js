@@ -181,5 +181,15 @@ async function fetchPostOrder(response){
         }
     ) 
     let responseObj = await respond.json()
-    console.log(responseObj)
+    console.log(respond.ok, responseObj.data.payment.status)
+    if (respond.ok && responseObj.data.payment.status === 0){
+        //success payment
+        window.location.href = `${server}/thankyou?orderNumber=${responseObj.data.number}`
+    }else if(respond.ok){
+        //unsuccess payment
+        alert(`付款失敗：${responseObj.data.payment.message}`)
+    }else if(responseObj.error){
+        //internet error
+        alert(`伺服器錯誤：${responseObj.message}`)
+    }
 }
