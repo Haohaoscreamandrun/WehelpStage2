@@ -112,3 +112,13 @@ class OrderResult(BaseModel):
 
 class PostOrderSuccess(BaseModel):
     data: OrderResult
+
+class Order(BaseModel):
+    number: str
+    price: Literal[2000, 2500]
+    trip: Trip
+    contact: Contact
+    status: Literal[1 ,0]
+
+class OrderResponse(BaseModel):
+    data: Order | None

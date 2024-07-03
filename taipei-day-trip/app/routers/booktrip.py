@@ -27,10 +27,27 @@ router = APIRouter(
 @router.get("", responses={
     200: {'model': GetBookingSuccess, 'description': "建立成功"},
     400: {'model': Error, 'description': '建立失敗，輸入不正確或其他原因'}
-    }, response_class = JSONResponse, summary = "取得尚未確認下單的預定行程")
+    }, response_class = [JSONResponse], summary = "取得尚未確認下單的預定行程")
 async def getBookings(user: Annotated[dict, Depends(user_validation)]):
 
     try:
+        sql = "SELECT\
+            booking.id AS booking_id,\
+            booking.user_id AS user_id,\
+            orders.order_number AS order_number,\
+            orders.payment_status AS payment_status\
+            FROM booking\
+            INNER JOIN orders ON booking.id = orders.booking_id\
+            WHERE user_id = %s AND payment_status = 'PAID'"
+        val = (user['id'],)
+        get_order_number = await check_booking(sql, val)
+        if len(get_order_number) > 0:
+            print(get_order_number)
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=get_order_number[0][2]
+            )
+
         sql = 'SELECT \
             attractions.id AS id,\
             attractions.name AS name,\
@@ -43,7 +60,7 @@ async def getBookings(user: Annotated[dict, Depends(user_validation)]):
             From attractions\
             INNER JOIN booking ON attractions.id = booking.attraction_id\
             WHERE user_id = %s'
-        val = (user['id'],)
+        
         get_booking = await check_booking(sql, val)
         
         if len(get_booking) > 0:
@@ -107,15 +124,34 @@ async def getBookings(bookingInput: BookingInput, user: Annotated[dict, Depends(
         )
     try:
         user_id = user['id']
-        sql = "SELECT * FROM booking\
-                WHERE user_id = %s"
-        val = (user_id,)
+        sql = "SELECT \
+        booking.id AS booking_id,\
+        booking.user_id AS user_id,\
+        orders.id AS orders_id,\
+        orders.payment_status AS payment_status\
+        FROM booking\
+        INNER JOIN orders ON booking.id = orders.booking_id\
+        WHERE user_id = %s AND payment_status = %s"
+        val = (user_id, 'PAID')
         user_booking = await check_booking(sql, val)
-        # Delete record if there's already one
+        
         if (len(user_booking) > 0):
-            sql = "DELETE FROM booking WHERE user_id = %s"
+            raise HTTPException(
+                status_code= status.HTTP_400_BAD_REQUEST,
+                detail="已有付款訂單，請於行程結束後再加入下一筆。"
+            )
+        # Delete record if there's already one and not paid
+        elif (len(user_booking) == 0):
+            sql = "SELECT id FROM booking WHERE user_id = %s"
             val = (user_id,)
-            commitDB(sql, val)
+            user_booking = await check_booking(sql, val)
+            if (len(user_booking) > 0):
+                sql = "DELETE FROM orders WHERE booking_id = %s"
+                val = (user_booking[0][0],)
+                commitDB(sql, val)
+                sql = "DELETE FROM booking WHERE user_id = %s"
+                val = (user_id,)
+                commitDB(sql, val)
         # Insert new one
         sql = 'INSERT INTO booking\
                 (user_id, attraction_id, date, time, price)\

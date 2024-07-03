@@ -45,11 +45,12 @@ export async function submitBooking(event){
       }),
       body: JSON.stringify(request)
     })
-    
+    let response = await respond.json()
+    console.log(response)
     if (respond === null){
       console.log("Nothing returned.")
-    }else if (respond.error){
-      alert(respond.message)
+    }else if (response.error){
+      alert(response.message)
     }else if(respond.ok){
       window.location.href = `${server}/booking`
     }
