@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
 from starlette import status
 import string, random
-import json, socket
+import json
 from app.function.function import *
 from app.function.basemodel import *
 import requests
