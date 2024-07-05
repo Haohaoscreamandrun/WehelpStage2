@@ -10,7 +10,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # router
 
-from .routers import attractions, user, booktrip
+from .routers import attractions, user, booktrip, order
 
 # Server
 
@@ -21,6 +21,7 @@ app = FastAPI()
 app.include_router(attractions.router)
 app.include_router(user.router)
 app.include_router(booktrip.router)
+app.include_router(order.router)
 
 # Static files
 

@@ -21,6 +21,7 @@ async function flow(){
   // fetch booking table and render the rest
   let getBookingURL = server + '/api/booking'
   let token = localStorage.getItem('token')
+  
   try{
       let respond = await fetch(getBookingURL, {
       method : "GET",
@@ -30,17 +31,22 @@ async function flow(){
       })
     })
     let response = await respond.json()
-
-    renderBooking(user, response)
-    
-    } catch (error) {
+    if (respond.ok){
+      renderBooking(user, response)
+      // tappay
+      TPDirect.setupSDK(151734, 'app_9veB5VWRTfHKqTuloC4j32wfD9ERzCDGzl8JfEs6mChxraKzPdx8chncoUVK', 'sandbox')
+      TPDirect.card.setup(config)
+      TPDirect.card.onUpdate(onUpdate)
+      let paymentForm = document.getElementById('paymentbar')
+      paymentForm.addEventListener('submit', (event)=>{
+        event.preventDefault()
+        onSubmit(response)
+      })
+    }else if(response.error){
+      alert(response.message)
+    }
+  } catch (error) {
     console.error('Error fetching data:', error);
   }
-
-  // tappay
-  TPDirect.setupSDK(151734, 'app_9veB5VWRTfHKqTuloC4j32wfD9ERzCDGzl8JfEs6mChxraKzPdx8chncoUVK', 'sandbox')
-  TPDirect.card.setup(config)
-  TPDirect.card.onUpdate(onUpdate)
-  $('form').on('submit', onSubmit)
 }
 flow()

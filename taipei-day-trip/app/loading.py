@@ -137,4 +137,25 @@ except mysql.connector.errors.ProgrammingError as e:
 	else:
 		print("An error occurred when create table in MySQL.",e)
 
+sql = 'CREATE TABLE orders(\
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,\
+	booking_id BIGINT,\
+	order_number VARCHAR(50),\
+	contact_name VARCHAR(30),\
+	contact_email VARCHAR(50),\
+	contact_phone VARCHAR(15),\
+	prime_number VARCHAR(64),\
+	payment_status VARCHAR(6),\
+	FOREIGN KEY (booking_id) REFERENCES booking(id)\
+	);'
+
+try:
+	mycursor.execute(sql)
+	print("Table 'orders' created successfully.")
+except mysql.connector.errors.ProgrammingError as e:
+	if e.errno == 1050:
+		print("Table 'orders' already exists.")
+	else:
+		print("An error occurred when create table in MySQL.", e)
+
 mydb.close()

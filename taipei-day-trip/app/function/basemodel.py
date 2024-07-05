@@ -79,3 +79,45 @@ class Booking(BaseModel):
 
 class GetBookingSuccess(BaseModel):
     data: Booking | None
+
+
+class Trip(BaseModel):
+    attraction: BookingAttraction
+    date: date
+    time: Literal['Morning', 'Afternoon']
+
+
+class Contact(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str
+
+class OrderInput(BaseModel):
+    price: Literal[2000, 2500]
+    trip: Trip
+    contact: Contact
+
+class PostOrder(BaseModel):
+    prime: str
+    order: OrderInput
+
+class PaymentStatus(BaseModel):
+    status: int
+    message: str
+
+class OrderResult(BaseModel):
+    number: str
+    payment: PaymentStatus
+
+class PostOrderSuccess(BaseModel):
+    data: OrderResult
+
+class Order(BaseModel):
+    number: str
+    price: Literal[2000, 2500]
+    trip: Trip
+    contact: Contact
+    status: Literal[1 ,0]
+
+class OrderResponse(BaseModel):
+    data: Order | None
