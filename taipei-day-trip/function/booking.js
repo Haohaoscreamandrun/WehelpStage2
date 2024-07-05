@@ -31,7 +31,6 @@ async function flow(){
       })
     })
     let response = await respond.json()
-    console.log(response)
     if (respond.ok){
       renderBooking(user, response)
       // tappay
@@ -44,7 +43,7 @@ async function flow(){
         onSubmit(response)
       })
     }else if(response.error){
-      window.location.href = `${server}/thankyou?orderNumber=${response.message}`
+      alert(response.message)
     }
   } catch (error) {
     console.error('Error fetching data:', error);

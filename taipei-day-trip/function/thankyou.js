@@ -18,6 +18,7 @@ async function flow(){
     let orderNumber = new URLSearchParams(window.location.search).get('orderNumber')
     let response = await getOrders(orderNumber)
 
+    let displayOrderNumber = document.querySelector("#order-number")
     let imgContainer = document.querySelector('.thankyoubar--trip--img')
     let imgTitle = document.querySelector('.thankyoubar--trip--img--name')
     let contactName = document.getElementById('contact-name')
@@ -27,6 +28,7 @@ async function flow(){
     let tripTime = document.getElementById('trip-time')
     let tripAddress = document.getElementById('trip-address')
 
+    displayOrderNumber.innerText = orderNumber
     imgContainer.style.backgroundImage = `url(${response.data.trip.attraction.image})`
     imgTitle.innerText = response.data.trip.attraction.name
     contactName.innerText = response.data.contact.name

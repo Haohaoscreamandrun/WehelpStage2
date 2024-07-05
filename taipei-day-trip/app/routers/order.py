@@ -31,7 +31,7 @@ async def payment_TapPay(reqest: Request, order: PostOrder, user: Annotated[dict
   try:
     # Insert into orders table
     sql1 = 'SELECT id from booking\
-            WHERE user_id = %s'
+            WHERE user_id = %s ORDER BY id desc LIMIT 1'
     val1 = (user['id'],)
     result = await check_booking(sql1, val1)
     order_number = ''.join(random.choices(string.ascii_letters+string.digits, k=50))
@@ -110,7 +110,6 @@ async def payment_TapPay(reqest: Request, order: PostOrder, user: Annotated[dict
     200: {'model': OrderResponse, 'description': "根據訂單編號取得訂單資訊，null 表示沒有資料"}
 }, response_class=JSONResponse, summary="根據訂單編號取得訂單資訊")
 async def get_orders(reqest: Request, orderNumber: str ,user: Annotated[dict, Depends(user_validation)]):
-  print(orderNumber)
   try:
     sql = "SELECT \
         booking.price AS price,\
@@ -131,7 +130,7 @@ async def get_orders(reqest: Request, orderNumber: str ,user: Annotated[dict, De
         WHERE order_number = %s"
     val = (orderNumber,)
     result = await check_booking(sql, val)
-    print(result)
+    
     if len(result) > 0 :
       if result[0][11] == 'PAID' :
         payment_status = 1
