@@ -9,8 +9,8 @@ load_dotenv()
 DBpassword = os.getenv('DBpassword')
 
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="jimmy",
+    host="happycone.cnc4cy8wmip0.ap-southeast-2.rds.amazonaws.com",
+    user="happycone",
     password=DBpassword,
     database="attractions"
 )

@@ -17,8 +17,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # connection pool
 dbconfig = {
-    'host': "localhost",
-    'user': "jimmy",
+    'host': "happycone.cnc4cy8wmip0.ap-southeast-2.rds.amazonaws.com",
+    'user': "happycone",
     'password': DBpassword,
     'database': "attractions"
 }
