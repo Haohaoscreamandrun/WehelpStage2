@@ -144,3 +144,7 @@ cython_debug/
 
 # key
 .pem
+
+# other
+miniconda.md
+ubuntuProcess.md
