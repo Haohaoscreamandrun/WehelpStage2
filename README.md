@@ -95,4 +95,4 @@ Hidden .env file contains necessary credentials and configurations for AWS, MySQ
 
 ## API Endpoints
 
-[Swagger docs](https://taipeidaytrip.haohaoscreamandrun.online/docs)
+[Swagger docs](https://taipeidaytrip.haohaoscreamandrun.online/swagger)
