@@ -23,67 +23,66 @@ This project is an e-commerce website that allows users to book and pay for trip
 
 ## Structure
 
-WehelpStage2/
-┣ app/
-┃ ┣ function/
-┃ ┃ ┣ basemodel.py
-┃ ┃ ┗ function.py
-┃ ┣ routers/
-┃ ┃ ┣ attractions.py
-┃ ┃ ┣ booktrip.py
-┃ ┃ ┣ order.py
-┃ ┃ ┗ user.py
-┃ ┣ app.py
-┃ ┗ loading.py
-┣ data/
-┃ ┗ taipei-attractions.json
-┣ function/
-┃ ┣ attraction/
-┃ ┃ ┣ bookSubmit.js
-┃ ┃ ┣ fetch.js
-┃ ┃ ┣ pagination.js
-┃ ┃ ┗ price.js
-┃ ┣ booking/
-┃ ┃ ┣ bookDelete.js
-┃ ┃ ┣ bookRender.js
-┃ ┃ ┗ tappay.js
-┃ ┣ common/
-┃ ┃ ┣ member.js
-┃ ┃ ┣ nav_button.js
-┃ ┃ ┣ panel.js
-┃ ┃ ┣ server.js
-┃ ┃ ┗ token.js
-┃ ┣ index/
-┃ ┃ ┣ fetch.js
-┃ ┃ ┗ search.js
-┃ ┣ thankyou/
-┃ ┃ ┗ fetch.js
-┃ ┣ attraction.js
-┃ ┣ booking.js
-┃ ┣ index.js
-┃ ┗ thankyou.js
-┣ source/
-┃ ┣ icon_close.png
-┃ ┣ icon_delete.png
-┃ ┣ icon_search.png
-┃ ┣ left arrow.png
-┃ ┣ right arrow.png
-┃ ┣ taipei_icon.png
-┃ ┗ welcome.png
-┣ static/
-┃ ┣ attraction.html
-┃ ┣ booking.html
-┃ ┣ index.html
-┃ ┗ thankyou.html
-┣ style/
-┃ ┗ style.css
-┣ .dockerignore
-┣ .gitignore
-┣ compose.yaml
-┣ Dockerfile
-┣ README.Docker.md
-┣ README.md
-┗ requirements.txt
+- [app/](./app)
+  - [function/](./app/function)
+    - [basemodel.py](./app/function/basemodel.py)
+    - [function.py](./app/function/function.py)
+  - [routers/](./app/routers)
+    - [attractions.py](./app/routers/attractions.py)
+    - [booktrip.py](./app/routers/booktrip.py)
+    - [order.py](./app/routers/order.py)
+    - [user.py](./app/routers/user.py)
+  - [app.py](./app/app.py)
+  - [loading.py](./app/loading.py)
+- [data/](./data)
+  - [taipei-attractions.json](./data/taipei-attractions.json)
+- [function/](./function)
+  - [attraction/](./function/attraction)
+    - [bookSubmit.js](./function/attraction/bookSubmit.js)
+    - [fetch.js](./function/attraction/fetch.js)
+    - [pagination.js](./function/attraction/pagination.js)
+    - [price.js](./function/attraction/price.js)
+  - [booking/](./function/booking)
+    - [bookDelete.js](./function/booking/bookDelete.js)
+    - [bookRender.js](./function/booking/bookRender.js)
+    - [tappay.js](./function/booking/tappay.js)
+  - [common/](./function/common)
+    - [member.js](./function/common/member.js)
+    - [nav_button.js](./function/common/nav_button.js)
+    - [panel.js](./function/common/panel.js)
+    - [server.js](./function/common/server.js)
+    - [token.js](./function/common/token.js)
+  - [index/](./function/index)
+    - [fetch.js](./function/index/fetch.js)
+    - [search.js](./function/index/search.js)
+  - [thankyou/](./function/thankyou)
+    - [fetch.js](./function/thankyou/fetch.js)
+  - [attraction.js](./function/attraction.js)
+  - [booking.js](./function/booking.js)
+  - [index.js](./function/index.js)
+  - [thankyou.js](./function/thankyou.js)
+- [source/](./source)
+  - [icon_close.png](./source/icon_close.png)
+  - [icon_delete.png](./source/icon_delete.png)
+  - [icon_search.png](./source/icon_search.png)
+  - [left_arrow.png](./source/left_arrow.png)
+  - [right_arrow.png](./source/right_arrow.png)
+  - [taipei_icon.png](./source/taipei_icon.png)
+  - [welcome.png](./source/welcome.png)
+- [static/](./static)
+  - [attraction.html](./static/attraction.html)
+  - [booking.html](./static/booking.html)
+  - [index.html](./static/index.html)
+  - [thankyou.html](./static/thankyou.html)
+- [style/](./style)
+  - [style.css](./style/style.css)
+- [.dockerignore](./.dockerignore)
+- [.gitignore](./.gitignore)
+- [compose.yaml](./compose.yaml)
+- [Dockerfile](./Dockerfile)
+- [README.Docker.md](./README.Docker.md)
+- [README.md](./README.md)
+- [requirements.txt](./requirements.txt)
 
 ## Deployment
 
@@ -96,4 +95,4 @@ Hidden .env file contains necessary credentials and configurations for AWS, MySQ
 
 ## API Endpoints
 
-[Swagger docs](https://taipeidaytrip.haohaoscreamandrun.online/docs)
+[Swagger docs](https://taipeidaytrip.haohaoscreamandrun.online/swagger)

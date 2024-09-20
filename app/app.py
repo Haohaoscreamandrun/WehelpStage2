@@ -14,7 +14,7 @@ from .routers import attractions, user, booktrip, order
 
 # Server
 
-app = FastAPI()
+app = FastAPI(docs_url="/swagger")
 
 # Router include
 
