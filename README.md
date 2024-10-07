@@ -92,7 +92,3 @@ This project is an e-commerce website that allows users to book and pay for trip
 ## Environment variables
 
 Hidden .env file contains necessary credentials and configurations for AWS, MySQL, and TapPay.
-
-## API Endpoints
-
-[Swagger docs](https://taipeidaytrip.haohaoscreamandrun.online/swagger)
