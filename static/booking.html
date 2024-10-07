@@ -1,118 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台北一日遊</title>
-  <link rel="stylesheet" href="/style/style.css">
-  <link rel="icon" type="image/png" href="../source/taipei_icon.png">
-</head>
-<script defer type="module" src="/function/booking.js"></script>
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>
-<body>
-  <div class="navbar">
-    <div class="navbar--title">台北一日遊</div>
-    <div class="navbar--navcontainer">
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--booking">預定行程</div>
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--login"></div>
-    </div>
-  </div>
-  <div class="seperation fullwidth"></div>
-  <div class="reservebar">
-    <div class="reservebar--greeting"></div>
-    <div class="reservebar--bookinginfo">
-      <div class="reservebar--bookinginfo--img"></div>
-      <div class="reservebar--bookinginfo--details">
-        <div class="reservebar--bookinginfo--details--titlerow">
-          <div class="reservebar--bookinginfo--details--titlerow--title"></div>
-          <div class="reservebar--bookinginfo--details--titlerow--delete"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台北一日遊</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="icon" type="image/png" href="../source/taipei_icon.png" />
+  </head>
+  <script defer type="module" src="/function/booking.js"></script>
+  <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>
+  <body>
+    <div class="navbar">
+      <div class="navbar--title">台北一日遊</div>
+      <div class="navbar--navcontainer">
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--booking"
+        >
+          預定行程
         </div>
-        <div class="reservebar--bookinginfo--details--contentrow">
-          <div class="reservebar--bookinginfo--details--contentrow--contenttitle">日期：</div>
-          <div class="reservebar--bookinginfo--details--contentrow--conttent" id="reservebar--bookinginfo--details--contentrow--date"></div>
-        </div>
-        <div class="reservebar--bookinginfo--details--contentrow">
-          <div class="reservebar--bookinginfo--details--contentrow--contenttitle">時間：</div>
-          <div class="reservebar--bookinginfo--details--contentrow--conttent"
-            id="reservebar--bookinginfo--details--contentrow--time"></div>
-        </div>
-        <div class="reservebar--bookinginfo--details--contentrow">
-          <div class="reservebar--bookinginfo--details--contentrow--contenttitle">費用：</div>
-          <div class="reservebar--bookinginfo--details--contentrow--conttent"
-            id="reservebar--bookinginfo--details--contentrow--price"></div>
-        </div>
-        <div class="reservebar--bookinginfo--details--contentrow">
-          <div class="reservebar--bookinginfo--details--contentrow--contenttitle">地點：</div>
-          <div class="reservebar--bookinginfo--details--contentrow--conttent"
-            id="reservebar--bookinginfo--details--contentrow--address"></div>
-        </div>
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--login"
+        ></div>
       </div>
     </div>
-  </div>
-  <div class="seperation shrink--onphone"></div>
-  <div class="credentialbar">
-    <form class="credentialbar--form" id="contactbar">
-      <div class="credentialbar--form--title">您的聯絡資訊</div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--nameinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--contactname">聯絡姓名：</label>
-        <input type="text" class="credentialbar--form--content--input" id="credentialbar--form--content--nameinput">
+    <div class="seperation fullwidth"></div>
+    <div class="reservebar">
+      <div class="reservebar--greeting"></div>
+      <div class="reservebar--bookinginfo">
+        <div class="reservebar--bookinginfo--img"></div>
+        <div class="reservebar--bookinginfo--details">
+          <div class="reservebar--bookinginfo--details--titlerow">
+            <div
+              class="reservebar--bookinginfo--details--titlerow--title"
+            ></div>
+            <div
+              class="reservebar--bookinginfo--details--titlerow--delete"
+            ></div>
+          </div>
+          <div class="reservebar--bookinginfo--details--contentrow">
+            <div
+              class="reservebar--bookinginfo--details--contentrow--contenttitle"
+            >
+              日期：
+            </div>
+            <div
+              class="reservebar--bookinginfo--details--contentrow--conttent"
+              id="reservebar--bookinginfo--details--contentrow--date"
+            ></div>
+          </div>
+          <div class="reservebar--bookinginfo--details--contentrow">
+            <div
+              class="reservebar--bookinginfo--details--contentrow--contenttitle"
+            >
+              時間：
+            </div>
+            <div
+              class="reservebar--bookinginfo--details--contentrow--conttent"
+              id="reservebar--bookinginfo--details--contentrow--time"
+            ></div>
+          </div>
+          <div class="reservebar--bookinginfo--details--contentrow">
+            <div
+              class="reservebar--bookinginfo--details--contentrow--contenttitle"
+            >
+              費用：
+            </div>
+            <div
+              class="reservebar--bookinginfo--details--contentrow--conttent"
+              id="reservebar--bookinginfo--details--contentrow--price"
+            ></div>
+          </div>
+          <div class="reservebar--bookinginfo--details--contentrow">
+            <div
+              class="reservebar--bookinginfo--details--contentrow--contenttitle"
+            >
+              地點：
+            </div>
+            <div
+              class="reservebar--bookinginfo--details--contentrow--conttent"
+              id="reservebar--bookinginfo--details--contentrow--address"
+            ></div>
+          </div>
+        </div>
       </div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--mailinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--contactemail">聯絡信箱：</label>
-        <input type="email" class="credentialbar--form--content--input" id="credentialbar--form--content--mailinput">
-      </div>
-      <div class="credentialbar--form--content">
-        <label for="credentialbar--form--content--phoneinput" class="credentialbar--form--content--label"
-          id="credentialbar--form--content--contactphone">手機號碼：</label>
-        <input type="tel" class="credentialbar--form--content--input" id="credentialbar--form--content--phoneinput">
-      </div>
-      <div class="credentialbar--form--reminder">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
-    </form>
-  </div>
-  <div class="credentialbar">
-    <form class="credentialbar--form" id="paymentbar">
-      <div class="credentialbar--form--title">信用卡付款資訊</div>
-      <div class="credentialbar--form--content" >
-        <div class="credentialbar--form--content--label"
-          id="credentialbar--form--content--cardnumber">卡片號碼：</div>
-        <div class="credentialbar--form--content--input" id="card-number"></div>
-      </div>
-      <div class="credentialbar--form--content" >
-        <div class="credentialbar--form--content--label"
-          id="credentialbar--form--content--cardexpire">過期時間：</div>
-        <div class="credentialbar--form--content--input" id="card-expiration-date"></div>
-      </div>
-      <div class="credentialbar--form--content last--child">
-        <div class="credentialbar--form--content--label"
-          id="credentialbar--form--content--card3digits">驗證密碼：</div>
-        <div class="credentialbar--form--content--input" id="card-ccv"></div>
-      </div>
-      <div class="seperation shrink--onphone"></div>
-      <div class="submitbar">
-        <div class="submitbar--totalprice">總價：新台幣 2000 元</div>
-        <button type="submit" class="submitbar--submit" disabled>確認訂購並付款</button>
-      </div>
-    </form>
-  </div>
-  
-  <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
-  <div class="popupbackground"></div>
-  <div class="popupbar">
-    <div class="popupbar--popup">
-      <form class="popupbar--popup--form" id="signin">
-        <div class="popupbar--popup--form--title">登入會員帳號</div>
-        <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input"
-          placeholder="輸入電子信箱" autocomplete="email">
-        <input type="password" name="inputPassword" id="popupbar--popup--form--password"
-          class="popupbar--popup--form--input" placeholder="輸入密碼" autocomplete="current-password">
-        <input type="submit" value="登入帳戶" class="popupbar--popup--form--submit">
-        <div class="popupbar--popup--form--warning"></div>
-        <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
+    </div>
+    <div class="seperation shrink--onphone"></div>
+    <div class="credentialbar">
+      <form class="credentialbar--form" id="contactbar">
+        <div class="credentialbar--form--title">您的聯絡資訊</div>
+        <div class="credentialbar--form--content">
+          <label
+            for="credentialbar--form--content--nameinput"
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--contactname"
+            >聯絡姓名：</label
+          >
+          <input
+            type="text"
+            class="credentialbar--form--content--input"
+            id="credentialbar--form--content--nameinput"
+          />
+        </div>
+        <div class="credentialbar--form--content">
+          <label
+            for="credentialbar--form--content--mailinput"
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--contactemail"
+            >聯絡信箱：</label
+          >
+          <input
+            type="email"
+            class="credentialbar--form--content--input"
+            id="credentialbar--form--content--mailinput"
+          />
+        </div>
+        <div class="credentialbar--form--content">
+          <label
+            for="credentialbar--form--content--phoneinput"
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--contactphone"
+            >手機號碼：</label
+          >
+          <input
+            type="tel"
+            class="credentialbar--form--content--input"
+            id="credentialbar--form--content--phoneinput"
+          />
+        </div>
+        <div class="credentialbar--form--reminder">
+          請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+        </div>
       </form>
-      <div class="popupbar--popup--closebtn"></div>
     </div>
-  </div>
-</body>
+    <div class="credentialbar">
+      <form class="credentialbar--form" id="paymentbar">
+        <div class="credentialbar--form--title">信用卡付款資訊</div>
+        <div class="credentialbar--form--content">
+          <div
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--cardnumber"
+          >
+            卡片號碼：
+          </div>
+          <div
+            class="credentialbar--form--content--input"
+            id="card-number"
+          ></div>
+        </div>
+        <div class="credentialbar--form--content">
+          <div
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--cardexpire"
+          >
+            過期時間：
+          </div>
+          <div
+            class="credentialbar--form--content--input"
+            id="card-expiration-date"
+          ></div>
+        </div>
+        <div class="credentialbar--form--content last--child">
+          <div
+            class="credentialbar--form--content--label"
+            id="credentialbar--form--content--card3digits"
+          >
+            驗證密碼：
+          </div>
+          <div class="credentialbar--form--content--input" id="card-ccv"></div>
+        </div>
+        <div class="seperation shrink--onphone"></div>
+        <div class="submitbar">
+          <div class="submitbar--totalprice">總價：新台幣 2000 元</div>
+          <button type="submit" class="submitbar--submit" disabled>
+            確認訂購並付款
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footerbar">COPYRIGHT &#169; 2021台北一日遊</div>
+    <div class="popupbackground"></div>
+    <div class="popupbar">
+      <div class="popupbar--popup">
+        <form class="popupbar--popup--form" id="signin">
+          <div class="popupbar--popup--form--title">登入會員帳號</div>
+          <input
+            type="email"
+            name="inputEmail"
+            id="popupbar--popup--form--email"
+            class="popupbar--popup--form--input"
+            placeholder="輸入電子信箱"
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            name="inputPassword"
+            id="popupbar--popup--form--password"
+            class="popupbar--popup--form--input"
+            placeholder="輸入密碼"
+            autocomplete="current-password"
+          />
+          <input
+            type="submit"
+            value="登入帳戶"
+            class="popupbar--popup--form--submit"
+          />
+          <div class="popupbar--popup--form--warning"></div>
+          <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
+        </form>
+        <div class="popupbar--popup--closebtn"></div>
+      </div>
+    </div>
+  </body>
 </html>

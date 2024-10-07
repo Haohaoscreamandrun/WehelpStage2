@@ -3,9 +3,9 @@
 ## Reference
 
 1. [Miniconda installation](https://docs.anaconda.com/free/miniconda/index.html)
-2. [用conda建立及管理python虛擬環境](https://medium.com/python4u/%E7%94%A8conda%E5%BB%BA%E7%AB%8B%E5%8F%8A%E7%AE%A1%E7%90%86python%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-b61fd2a76566)
+2. [用 conda 建立及管理 python 虛擬環境](https://medium.com/python4u/%E7%94%A8conda%E5%BB%BA%E7%AB%8B%E5%8F%8A%E7%AE%A1%E7%90%86python%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-b61fd2a76566)
 
-> minianaconda只管理python package環境，mysql, git還是用通用環境裝
+> minianaconda 只管理 python package 環境，mysql, git 還是用通用環境裝
 
 ## Install miniconda
 
@@ -41,7 +41,7 @@ conda environments:
 base                  *  /home/ubuntu/miniconda3
 # Check python version
 (base) ubuntu@ip-172-31-23-171:~$ python --version
-Python 3.12.3 
+Python 3.12.3
 ```
 
 ## Create your own virtual env
@@ -56,7 +56,7 @@ taipeiAttractions        /home/ubuntu/miniconda3/envs/taipeiAttractions
 
 # Activate VE
 (base) ubuntu@ip-172-31-23-171:~$ source activate taipeiAttractions
-(taipeiAttractions) ubuntu@ip-172-31-23-171:~$ 
+(taipeiAttractions) ubuntu@ip-172-31-23-171:~$
 ```
 
 ## install package in conda env

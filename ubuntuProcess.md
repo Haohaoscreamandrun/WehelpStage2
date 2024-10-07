@@ -11,23 +11,23 @@ Python 3.12.3
 
 1. Update all present packages that necessary
 
-    ```shell
-    ubuntu@ip-172-31-36-243:~/WehelpStage2$ sudo apt update
-    Get:1 http://ap-southeast-2.ec2.archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-    ...                              
-    Reading package lists... Done
-    Building dependency tree... Done
-    Reading state information... Done
-    37 packages can be upgraded. Run 'apt list --upgradable' to see them.
-    ```
+   ```shell
+   ubuntu@ip-172-31-36-243:~/WehelpStage2$ sudo apt update
+   Get:1 http://ap-southeast-2.ec2.archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+   ...
+   Reading package lists... Done
+   Building dependency tree... Done
+   Reading state information... Done
+   37 packages can be upgraded. Run 'apt list --upgradable' to see them.
+   ```
 
 2. Install pip with python3
 
-    ```shell
-    ubuntu@ip-172-31-36-243:~/WehelpStage2$ sudo apt install python3-pip
-    ubuntu@ip-172-31-36-243:~/WehelpStage2$ pip3 --version
-    pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
-    ```
+   ```shell
+   ubuntu@ip-172-31-36-243:~/WehelpStage2$ sudo apt install python3-pip
+   ubuntu@ip-172-31-36-243:~/WehelpStage2$ pip3 --version
+   pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
+   ```
 
 ## MySQL install
 
@@ -162,19 +162,19 @@ ubuntu@ip-172-31-36-243:~/WehelpStage2/taipei-day-trip$ uvicorn app:app --host 0
 ubuntu@ip-172-31-36-243:~/WehelpStage2$ nohup uvicorn taipei-day-trip.app:app --host 0.0.0.0 &
 ```
 
-另外需要去instance找傳入/出規則(Inbound rule)，新增以下規則：
+另外需要去 instance 找傳入/出規則(Inbound rule)，新增以下規則：
 
-1. 類型：自訂TCP
+1. 類型：自訂 TCP
 2. 連接埠：8000
-3. 來源：0.0.0.0/0 (允許任何IP存取)
+3. 來源：0.0.0.0/0 (允許任何 IP 存取)
 
 ## Submit pull request and comment as
 
-+ <http://13.236.0.170:8000/api/attractions?page=1>  
-+ <http://13.236.0.170:8000/api/attractions?page=0&keyword=劍潭>  
-+ <http://13.236.0.170:8000/api/attractions?page=0&keyword=北>  
-+ <http://13.236.0.170:8000/api/attraction/10>  
-+ <http://13.236.0.170:8000/api/mrts>
+- <http://13.236.0.170:8000/api/attractions?page=1>
+- <http://13.236.0.170:8000/api/attractions?page=0&keyword=劍潭>
+- <http://13.236.0.170:8000/api/attractions?page=0&keyword=北>
+- <http://13.236.0.170:8000/api/attraction/10>
+- <http://13.236.0.170:8000/api/mrts>
 
 ## If want to terminate nohup
 
