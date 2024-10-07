@@ -11,7 +11,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 # Server
 
-app = FastAPI()
+app = FastAPI(docs_url="/swagger")
 
 # Router include
 
