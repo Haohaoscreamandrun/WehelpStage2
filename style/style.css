@@ -203,11 +203,11 @@ body {
 }
 
 .scrollbar--scrollup--btn {
-  background-image: url("/source/left arrow.png");
+  background-image: url("/source/left_arrow.png");
 }
 
 .scrollbar--scrolldown--btn {
-  background-image: url("/source/right arrow.png");
+  background-image: url("/source/right_arrow.png");
 }
 
 .scrollbar--attractions {
