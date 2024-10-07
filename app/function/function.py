@@ -10,24 +10,24 @@ from starlette import status
 
 # connection to mysql
 load_dotenv()
-DBpassword = os.getenv('DBpassword')
-JWTkey = os.getenv('JWTkey')
+DBpassword = os.getenv("DBpassword")
+JWTkey = os.getenv("JWTkey")
 
-sys.stdout.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding="utf-8")
 
 # connection pool
 dbconfig = {
-    'host': "wehelp-parking-lot.cnc4cy8wmip0.ap-southeast-2.rds.amazonaws.com",
-    'user': "taipeidaytrip",
-    'password': DBpassword,
-    'database': "attractions"
+    "host": "wehelp-parking-lot.cnc4cy8wmip0.ap-southeast-2.rds.amazonaws.com",
+    "user": "taipeidaytrip",
+    "password": DBpassword,
+    "database": "attractions",
 }
 cnxpool = pooling.MySQLConnectionPool(
     pool_name="mypool",
     pool_size=5,
     # Reset session variables when the connection is returned to the pool.
     pool_reset_session=True,
-    **dbconfig
+    **dbconfig,
 )
 
 # Global function
@@ -42,12 +42,12 @@ async def fetchJSON(sql, val=None, dictionary=False):
 
         for data in myresult:
             # parse for grid data
-            if (len(data) == 10):
+            if len(data) == 10:
                 print("fetch JSONresponse, parse data type.")
-            # JSONresponse need a float type than decimal
+                # JSONresponse need a float type than decimal
                 data["lat"] = float(data["lat"])
                 data["lng"] = float(data["lng"])
-                data["images"] = data["images"].split(',')
+                data["images"] = data["images"].split(",")
 
     except Error as e:
         print("Error while connecting to MySQL using Connection pool ", e)
@@ -60,7 +60,6 @@ async def fetchJSON(sql, val=None, dictionary=False):
 
 
 def commitDB(sql, val=None):
-    
     try:
         cnxconnection = cnxpool.get_connection()
         mycursor = cnxconnection.cursor()
@@ -71,19 +70,17 @@ def commitDB(sql, val=None):
         print("Operational Error while connecting to MySQL using Connection pool ", e)
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Lost MySQL connection"
+            detail="Lost MySQL connection",
         )
     except ProgrammingError as e:
         print("Programming Error: Invalid SQL script ", e)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid SQL script"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid SQL script"
         )
     except Error as e:
         print("Error while connecting to MySQL using Connection pool ", e)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Other MySQL error occurred"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Other MySQL error occurred"
         )
     finally:
         # close connection
@@ -91,27 +88,31 @@ def commitDB(sql, val=None):
         cnxconnection.close()
         print("MySQL connection is closed")
 
+
 security = HTTPBearer()
-def user_validation(credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)]):
+
+
+def user_validation(
+    credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)],
+):
     token = credentials.credentials or None
     try:
         payload = jwt.decode(token, JWTkey, algorithms="HS256")
         yield payload
     except jwt.InvalidTokenError as e:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid token: " + str(e)
+            status_code=status.HTTP_403_FORBIDDEN, detail="Invalid token: " + str(e)
         )
     except jwt.PyJWTError as e:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="JWT error: " + str(e)
+            status_code=status.HTTP_403_FORBIDDEN, detail="JWT error: " + str(e)
         )
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Token validation error: " + str(e)
+            detail="Token validation error: " + str(e),
         )
+
 
 async def check_booking(sql, val=None):
     try:
@@ -124,19 +125,17 @@ async def check_booking(sql, val=None):
         print("Operational Error while connecting to MySQL using Connection pool ", e)
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Lost MySQL connection"
+            detail="Lost MySQL connection",
         )
     except ProgrammingError as e:
         print("Programming Error: Invalid SQL script ", e)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid SQL script"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid SQL script"
         )
     except Error as e:
         print("Error while connecting to MySQL using Connection pool ", e)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Other MySQL error occurred"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Other MySQL error occurred"
         )
     finally:
         # close connection

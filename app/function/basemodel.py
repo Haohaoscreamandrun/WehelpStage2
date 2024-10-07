@@ -6,40 +6,48 @@ import re
 
 # Regex pattern
 
-pattern_name = r'^[a-zA-Z0-9]{3,30}$'
-pattern_password = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$'
+pattern_name = r"^[a-zA-Z0-9]{3,30}$"
+pattern_password = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
 
 
 class UserSignUPInput(BaseModel):
-    name: str = Field(..., min_length=3, max_length=30,
-                      pattern=pattern_name)
+    name: str = Field(..., min_length=3, max_length=30, pattern=pattern_name)
     email: EmailStr
-    password: str = Field(..., min_length=8, max_length=20,)
+    password: str = Field(
+        ...,
+        min_length=8,
+        max_length=20,
+    )
 
-    @field_validator('password')
+    @field_validator("password")
     def password_pattern(cls, v):
         if re.match(pattern_password, v) is None:
             raise ValueError(
-                'password should contain at least 1 uppercase, 1 lowercase and 1 number.')
+                "password should contain at least 1 uppercase, 1 lowercase and 1 number."
+            )
         return v
 
 
 class UserSignInInput(BaseModel):
     email: EmailStr = Field(..., max_length=50)
-    password: str = Field(..., min_length=8, max_length=20,)
+    password: str = Field(
+        ...,
+        min_length=8,
+        max_length=20,
+    )
 
-    @field_validator('password')
+    @field_validator("password")
     def password_pattern(cls, v):
         if re.match(pattern_password, v) is None:
             raise ValueError(
-                'password should contain at least 1 uppercase, 1 lowercase and 1 number.')
+                "password should contain at least 1 uppercase, 1 lowercase and 1 number."
+            )
         return v
 
 
 class User(BaseModel):
     id: int
-    name: str = Field(..., min_length=3, max_length=30,
-                      pattern=pattern_name)
+    name: str = Field(..., min_length=3, max_length=30, pattern=pattern_name)
     email: EmailStr
 
 
@@ -50,7 +58,7 @@ class ReturnUser(BaseModel):
 class BookingInput(BaseModel):
     attractionId: int
     date: date
-    time: Literal['Morning', 'Afternoon']
+    time: Literal["Morning", "Afternoon"]
     price: Literal[2000, 2500]
 
 
@@ -73,7 +81,7 @@ class BookingAttraction(BaseModel):
 class Booking(BaseModel):
     attraction: BookingAttraction
     date: date
-    time: Literal['Morning', 'Afternoon']
+    time: Literal["Morning", "Afternoon"]
     price: Literal[2000, 2500]
 
 
@@ -84,7 +92,7 @@ class GetBookingSuccess(BaseModel):
 class Trip(BaseModel):
     attraction: BookingAttraction
     date: date
-    time: Literal['Morning', 'Afternoon']
+    time: Literal["Morning", "Afternoon"]
 
 
 class Contact(BaseModel):
@@ -92,32 +100,39 @@ class Contact(BaseModel):
     email: EmailStr
     phone: str
 
+
 class OrderInput(BaseModel):
     price: Literal[2000, 2500]
     trip: Trip
     contact: Contact
 
+
 class PostOrder(BaseModel):
     prime: str
     order: OrderInput
+
 
 class PaymentStatus(BaseModel):
     status: int
     message: str
 
+
 class OrderResult(BaseModel):
     number: str
     payment: PaymentStatus
 
+
 class PostOrderSuccess(BaseModel):
     data: OrderResult
+
 
 class Order(BaseModel):
     number: str
     price: Literal[2000, 2500]
     trip: Trip
     contact: Contact
-    status: Literal[1 ,0]
+    status: Literal[1, 0]
+
 
 class OrderResponse(BaseModel):
     data: Order | None

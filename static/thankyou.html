@@ -1,78 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style/style.css">
-  <title>台北一日遊</title>
-  <link rel="icon" type="image/png" href="../source/taipei_icon.png">
-</head>
-<script defer type="module" src="/function/thankyou.js"></script>
-<body>
-  <div class="navbar">
-    <div class="navbar--title">台北一日遊</div>
-    <div class="navbar--navcontainer">
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--booking">預定行程</div>
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--login"></div>
-    </div>
-  </div>
-  <div class="seperation fullwidth hide--onphone"></div>
-  <div class="thankyoubar">
-    <div class="thankyoubar--title">感謝您的訂購!</div>
-    <div class="thankyoubar--trip">
-      <div class="thankyoubar--trip--img">
-        <div class="thankyoubar--trip--img--name"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <title>台北一日遊</title>
+    <link rel="icon" type="image/png" href="../source/taipei_icon.png" />
+  </head>
+  <script defer type="module" src="/function/thankyou.js"></script>
+  <body>
+    <div class="navbar">
+      <div class="navbar--title">台北一日遊</div>
+      <div class="navbar--navcontainer">
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--booking"
+        >
+          預定行程
+        </div>
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--login"
+        ></div>
       </div>
     </div>
-    <div class="thankyoubar--contact">
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">訂單編號：</div>
-        <div class="thankyoubar--contact--content--info" id="order-number"></div>
+    <div class="seperation fullwidth hide--onphone"></div>
+    <div class="thankyoubar">
+      <div class="thankyoubar--title">感謝您的訂購!</div>
+      <div class="thankyoubar--trip">
+        <div class="thankyoubar--trip--img">
+          <div class="thankyoubar--trip--img--name"></div>
+        </div>
       </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">訂購人姓名：</div>
-        <div class="thankyoubar--contact--content--info" id="contact-name"></div>
-      </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">訂購人地址：</div>
-        <div class="thankyoubar--contact--content--info" id="contact-email"></div>
-      </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">訂購人電話：</div>
-        <div class="thankyoubar--contact--content--info" id="contact-phone"></div>
-      </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">集合日期：</div>
-        <div class="thankyoubar--contact--content--info" id="trip-date"></div>
-      </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">集合時間：</div>
-        <div class="thankyoubar--contact--content--info" id="trip-time"></div>
-      </div>
-      <div class="thankyoubar--contact--content">
-        <div class="thankyoubar--contact--content--label">集合地點：</div>
-        <div class="thankyoubar--contact--content--info" id="trip-address"></div>
+      <div class="thankyoubar--contact">
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">訂單編號：</div>
+          <div
+            class="thankyoubar--contact--content--info"
+            id="order-number"
+          ></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">訂購人姓名：</div>
+          <div
+            class="thankyoubar--contact--content--info"
+            id="contact-name"
+          ></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">訂購人地址：</div>
+          <div
+            class="thankyoubar--contact--content--info"
+            id="contact-email"
+          ></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">訂購人電話：</div>
+          <div
+            class="thankyoubar--contact--content--info"
+            id="contact-phone"
+          ></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">集合日期：</div>
+          <div class="thankyoubar--contact--content--info" id="trip-date"></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">集合時間：</div>
+          <div class="thankyoubar--contact--content--info" id="trip-time"></div>
+        </div>
+        <div class="thankyoubar--contact--content">
+          <div class="thankyoubar--contact--content--label">集合地點：</div>
+          <div
+            class="thankyoubar--contact--content--info"
+            id="trip-address"
+          ></div>
+        </div>
       </div>
     </div>
-    
-  </div>
-  <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
+    <div class="footerbar">COPYRIGHT &#169; 2021台北一日遊</div>
 
-  <div class="popupbackground"></div>
-  <div class="popupbar">
-    <div class="popupbar--popup">
-      <form class="popupbar--popup--form" id="signin">
-        <div class="popupbar--popup--form--title">登入會員帳號</div>
-        <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input"
-          placeholder="輸入電子信箱" autocomplete="email">
-        <input type="password" name="inputPassword" id="popupbar--popup--form--password"
-          class="popupbar--popup--form--input" placeholder="輸入密碼" autocomplete="current-password">
-        <input type="submit" value="登入帳戶" class="popupbar--popup--form--submit">
-        <div class="popupbar--popup--form--warning"></div>
-        <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
-      </form>
-      <div class="popupbar--popup--closebtn"></div>
+    <div class="popupbackground"></div>
+    <div class="popupbar">
+      <div class="popupbar--popup">
+        <form class="popupbar--popup--form" id="signin">
+          <div class="popupbar--popup--form--title">登入會員帳號</div>
+          <input
+            type="email"
+            name="inputEmail"
+            id="popupbar--popup--form--email"
+            class="popupbar--popup--form--input"
+            placeholder="輸入電子信箱"
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            name="inputPassword"
+            id="popupbar--popup--form--password"
+            class="popupbar--popup--form--input"
+            placeholder="輸入密碼"
+            autocomplete="current-password"
+          />
+          <input
+            type="submit"
+            value="登入帳戶"
+            class="popupbar--popup--form--submit"
+          />
+          <div class="popupbar--popup--form--warning"></div>
+          <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
+        </form>
+        <div class="popupbar--popup--closebtn"></div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

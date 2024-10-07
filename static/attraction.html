@@ -1,83 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台北一日遊</title>
-  <link rel="stylesheet" href="/style/style.css">
-  <link rel="icon" type="image/png" href="../source/taipei_icon.png">
-</head>
-<script defer type="module" src="/function/attraction.js"></script>
-<body>
-  <div class="navbar">
-    <div class="navbar--title">台北一日遊</div>
-    <div class="navbar--navcontainer">
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--booking">預定行程</div>
-      <div class="navbar--navcontainer--navbtn" id="navbar--navcontainer--login"></div>
-    </div>
-  </div>
-  <div class="seperation fullwidth hide--onphone"></div>
-  <div class="bookingbar">
-    <div class="bookingbar--imgcontainer">
-      <div class="bookingbar--imgcontainer--lastbtn"></div>
-      <div class="bookingbar--imgcontainer--pagination"></div>
-      <div class="bookingbar--imgcontainer--nextbtn"></div>
-    </div>
-    <div class="bookingbar--bookingpanel">
-      <div class="bookingbar--bookingpanel--title"></div>
-      <div class="bookingbar--bookingpanel--type"></div>
-      <form class="bookingbar--bookingpanel--bookingform" lang="en">
-        <div class="bookingbar--bookingpanel--bookingform--title">訂購導覽行程</div>
-        <div class="bookingbar--bookingpanel--bookingform--description">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-        <div class="bookingbar--bookingpanel--bookingform--date">
-          <label for="bookingbar--bookingpanel--bookingform--date--dateinput"
-          class="bookingbar--bookingpanel--bookingform--date--datelabel">選擇日期：</label>
-          <input type="date" name="bookingDate" id="bookingbar--bookingpanel--bookingform--date--dateinput" required>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台北一日遊</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="icon" type="image/png" href="../source/taipei_icon.png" />
+  </head>
+  <script defer type="module" src="/function/attraction.js"></script>
+  <body>
+    <div class="navbar">
+      <div class="navbar--title">台北一日遊</div>
+      <div class="navbar--navcontainer">
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--booking"
+        >
+          預定行程
         </div>
-        <div class="bookingbar--bookingpanel--bookingform--time">
-          <div class="bookingbar--bookingpanel--bookingform--time--timediv">選擇時間：</div>
-          <input type="radio" name="bookingTime" value="上半天"   id="bookingbar--bookingpanel--bookingform--time--timeinput1">
-          <label for="bookingbar--bookingpanel--bookingform--time--timeinput1" class="bookingbar--bookingpanel--bookingform--time--timelabel">上半天</label>
-          <input type="radio" name="bookingTime" value="下半天" id="bookingbar--bookingpanel--bookingform--time--timeinput2">
-          <label for="bookingbar--bookingpanel--bookingform--time--timeinput2"
-            class="bookingbar--bookingpanel--bookingform--time--timelabel">下半天</label>
-        </div>
-        <div class="bookingbar--bookingpanel--bookingform--price">
-          <div class="bookingbar--bookingpanel--bookingform--price--label">導覽費用：</div>
-          <div class="bookingbar--bookingpanel--bookingform--price--ntd"></div>
-        </div>
-        <button type="submit" class="bookingbar--bookingpanel--bookingform--submit">開始預約行程</button>
-      </form>
+        <div
+          class="navbar--navcontainer--navbtn"
+          id="navbar--navcontainer--login"
+        ></div>
+      </div>
     </div>
-  </div>
-  <div class="seperation shrink--onphone"></div>
-  <div class="detailbar">
-    <div class="detailbar--description"></div>
-    <div class="detailbar--addressdiv">
-      <div class="detailbar--addressdiv--title">景點地址：</div>
-      <div class="detailbar--addressdiv--address"></div>
+    <div class="seperation fullwidth hide--onphone"></div>
+    <div class="bookingbar">
+      <div class="bookingbar--imgcontainer">
+        <div class="bookingbar--imgcontainer--lastbtn"></div>
+        <div class="bookingbar--imgcontainer--pagination"></div>
+        <div class="bookingbar--imgcontainer--nextbtn"></div>
+      </div>
+      <div class="bookingbar--bookingpanel">
+        <div class="bookingbar--bookingpanel--title"></div>
+        <div class="bookingbar--bookingpanel--type"></div>
+        <form class="bookingbar--bookingpanel--bookingform" lang="en">
+          <div class="bookingbar--bookingpanel--bookingform--title">
+            訂購導覽行程
+          </div>
+          <div class="bookingbar--bookingpanel--bookingform--description">
+            以此景點為中心的一日行程，帶您探索城市角落故事
+          </div>
+          <div class="bookingbar--bookingpanel--bookingform--date">
+            <label
+              for="bookingbar--bookingpanel--bookingform--date--dateinput"
+              class="bookingbar--bookingpanel--bookingform--date--datelabel"
+              >選擇日期：</label
+            >
+            <input
+              type="date"
+              name="bookingDate"
+              id="bookingbar--bookingpanel--bookingform--date--dateinput"
+              required
+            />
+          </div>
+          <div class="bookingbar--bookingpanel--bookingform--time">
+            <div class="bookingbar--bookingpanel--bookingform--time--timediv">
+              選擇時間：
+            </div>
+            <input
+              type="radio"
+              name="bookingTime"
+              value="上半天"
+              id="bookingbar--bookingpanel--bookingform--time--timeinput1"
+            />
+            <label
+              for="bookingbar--bookingpanel--bookingform--time--timeinput1"
+              class="bookingbar--bookingpanel--bookingform--time--timelabel"
+              >上半天</label
+            >
+            <input
+              type="radio"
+              name="bookingTime"
+              value="下半天"
+              id="bookingbar--bookingpanel--bookingform--time--timeinput2"
+            />
+            <label
+              for="bookingbar--bookingpanel--bookingform--time--timeinput2"
+              class="bookingbar--bookingpanel--bookingform--time--timelabel"
+              >下半天</label
+            >
+          </div>
+          <div class="bookingbar--bookingpanel--bookingform--price">
+            <div class="bookingbar--bookingpanel--bookingform--price--label">
+              導覽費用：
+            </div>
+            <div
+              class="bookingbar--bookingpanel--bookingform--price--ntd"
+            ></div>
+          </div>
+          <button
+            type="submit"
+            class="bookingbar--bookingpanel--bookingform--submit"
+          >
+            開始預約行程
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="detailbar--transportdiv">
-      <div class="detailbar--transportdiv--title">交通方式：</div>
-      <div class="detailbar--transportdiv--transportation"></div>
+    <div class="seperation shrink--onphone"></div>
+    <div class="detailbar">
+      <div class="detailbar--description"></div>
+      <div class="detailbar--addressdiv">
+        <div class="detailbar--addressdiv--title">景點地址：</div>
+        <div class="detailbar--addressdiv--address"></div>
+      </div>
+      <div class="detailbar--transportdiv">
+        <div class="detailbar--transportdiv--title">交通方式：</div>
+        <div class="detailbar--transportdiv--transportation"></div>
+      </div>
     </div>
-  </div>
-  <div class="footerbar">COPYRIGHT &#169 2021台北一日遊</div>
-  <div class="popupbackground"></div>
-  <div class="popupbar">
-    <div class="popupbar--popup">
-      <form class="popupbar--popup--form" id="signin">
-        <div class="popupbar--popup--form--title">登入會員帳號</div>
-        <input type="email" name="inputEmail" id="popupbar--popup--form--email" class="popupbar--popup--form--input"
-          placeholder="輸入電子信箱">
-        <input type="password" name="inputPassword" id="popupbar--popup--form--password"
-          class="popupbar--popup--form--input" placeholder="輸入密碼">
-        <input type="submit" value="登入帳戶" class="popupbar--popup--form--submit">
-        <div class="popupbar--popup--form--warning"></div>
-        <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
-      </form>
-      <div class="popupbar--popup--closebtn"></div>
+    <div class="footerbar">
+      <span>COPYRIGHT</span>
+      <span>&#169;</span>
+      <span>2021台北一日遊</span>
     </div>
-  </div>
-</body>
+    <div class="popupbackground"></div>
+    <div class="popupbar">
+      <div class="popupbar--popup">
+        <form class="popupbar--popup--form" id="signin">
+          <div class="popupbar--popup--form--title">登入會員帳號</div>
+          <input
+            type="email"
+            name="inputEmail"
+            id="popupbar--popup--form--email"
+            class="popupbar--popup--form--input"
+            placeholder="輸入電子信箱"
+          />
+          <input
+            type="password"
+            name="inputPassword"
+            id="popupbar--popup--form--password"
+            class="popupbar--popup--form--input"
+            placeholder="輸入密碼"
+          />
+          <input
+            type="submit"
+            value="登入帳戶"
+            class="popupbar--popup--form--submit"
+          />
+          <div class="popupbar--popup--form--warning"></div>
+          <div class="popupbar--popup--form--switch">還沒有帳戶?點此註冊</div>
+        </form>
+        <div class="popupbar--popup--closebtn"></div>
+      </div>
+    </div>
+  </body>
 </html>
